@@ -66,6 +66,11 @@ public class DemoApplicationTests {
         System.out.println(JSON.toJSON(testDtoList));
     }
 
+    @Test
+    public void test2() {
+        System.out.println("this is test2a");
+    }
+
 }
 
 
