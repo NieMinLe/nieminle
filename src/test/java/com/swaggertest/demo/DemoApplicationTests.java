@@ -76,6 +76,11 @@ public class DemoApplicationTests {
         System.out.println("this is test2a");
     }
 
+    @Test
+    public void test3() {
+        System.out.println("还有我");
+    }
+
 }
 
 
