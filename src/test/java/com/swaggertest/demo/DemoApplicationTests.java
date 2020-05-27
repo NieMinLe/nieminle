@@ -71,6 +71,11 @@ public class DemoApplicationTests {
         System.out.println("this is my test");
     }
 
+    @Test
+    public void test2() {
+        System.out.println("this is test2a");
+    }
+
 }
 
 
