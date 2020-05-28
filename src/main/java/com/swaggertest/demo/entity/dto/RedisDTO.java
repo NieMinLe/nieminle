@@ -6,13 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @Author LIZEJIN
- * @Description //TODO 方法注释
- * @Date 2020/5/7 14:56
- * @Param
- * @Return
- */
 @Data //生成getter,setter等函数
 @Builder
 @AllArgsConstructor //生成全参数构造函数

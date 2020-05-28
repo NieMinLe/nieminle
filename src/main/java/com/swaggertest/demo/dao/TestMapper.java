@@ -14,6 +14,4 @@ public interface TestMapper extends Mapper<TestDto> {
 
     List<TestDto> queryLikeName(String Sname);
 
-    List<TestDto> selectPage();
-
 }

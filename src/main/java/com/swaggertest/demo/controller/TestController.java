@@ -35,8 +35,8 @@ public class TestController {
     public List<TestDto> query(){
         // redisUtil.setCache("three","you is women");
         // redisUtil.setCacheExpireTime("three","you is wo",2L, TimeUnit.HOURS);
-        Object a = redisUtil.getCacheObject("first");
-        System.out.println("keya==="+a);
+        redisUtil.del("first");
+        redisUtil.del("three");
         return testService.query();
     }
 
