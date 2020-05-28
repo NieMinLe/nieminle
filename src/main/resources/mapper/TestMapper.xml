@@ -2,36 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.swaggertest.demo.dao.TestMapper">
     <!--查询所有-->
-    <!--<select id="query" resultType="com.swaggertest.demo.entity.dto.TestDto">-->
-        <!--select * from first-->
-    <!--</select>-->
+    <select id="selectPage" resultType="com.swaggertest.demo.entity.dto.TestDto">
+        select * from first
+    </select>
 
     <!--通过明细模糊查询-->
     <select id="queryLikeName" resultType="com.swaggertest.demo.entity.dto.TestDto" parameterType="string">
         select * from first f1 where f1.Sname like CONCAT('%',#{Sname},'%')
     </select>
-
-    <!--通过ID查询-->
-    <!--<select id="queryOne" resultType="com.swaggertest.demo.entity.dto.TestDto">-->
-        <!--select * from first f1 where f1.Sno = #{id}-->
-    <!--</select>-->
-
-    <!--<insert id="insert" parameterType="com.swaggertest.demo.entity.dto.TestDto">-->
-        <!--insert into first (Sname,Sex,Sage,Sdept) value(#{Sname},#{Sex},#{Sage},#{Sdept})-->
-    <!--</insert>-->
-
-  <!--<update id="update"  parameterType="com.swaggertest.demo.entity.dto.TestDto">-->
-    <!--UPDATE first-->
-    <!--<trim prefix="set" suffixOverrides=",">-->
-      <!--<if test="Sname!=null">Sname=#{Sname},</if>-->
-      <!--<if test="Sex!=null">Sex=#{Sex},</if>-->
-      <!--<if test="Sage!=null">Sage=#{Sage},</if>-->
-      <!--<if test="Sdept!=null">Sdept=#{Sdept},</if>-->
-    <!--</trim>-->
-    <!--WHERE Sno=#{Sno}-->
-  <!--</update>-->
-
-  <!--<delete id="delete" parameterType="int">-->
-      <!--delete from first where sno = #{id}-->
-  <!--</delete>-->
 </mapper>

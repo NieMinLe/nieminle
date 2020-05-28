@@ -1,5 +1,7 @@
 #项目自述
-- 简单增删查改，mybatis、swagger2、lombok、Json
+- 技术：
+- mybatis、tk.mybatis、swagger2、lombok、fastJson
+- 自定义exception、commons.lang3校验、PageHelper
 
 ## 注意事项
 - [斗鱼](https://www.douyu.com/directory/all)

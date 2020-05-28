@@ -11,15 +11,9 @@ import tk.mybatis.mapper.common.Mapper;
  **/
 @Repository
 public interface TestMapper extends Mapper<TestDto> {
-    // List<TestDto> query();
-
-    // TestDto queryOne(int id);
 
     List<TestDto> queryLikeName(String Sname);
 
-    // int insert(TestDto testDto);
+    List<TestDto> selectPage();
 
-    // int update(TestDto testDto);
-    //
-    // int delete(int id);
 }

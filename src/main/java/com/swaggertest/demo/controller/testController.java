@@ -74,10 +74,9 @@ public class testController {
         return testService.delete(sno);
     }
 
-    @GetMapping("/findAll")
-    @ApiOperation("分页查询"
-        + "")
-    public String findAll(Integer pageSize,Integer pageNum) {
+    @GetMapping("/findAllPage")
+    @ApiOperation("分页查询")
+    public String findAllPage(Integer pageNum,Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<TestDto> countries = testService.query();
 
@@ -93,7 +92,8 @@ public class testController {
         System.out.println("起始页：" + page.getNavigateFirstPage());
         System.out.println("结尾页：" + page.getNavigateLastPage());
 
-
+        System.out.println(JSON.toJSONString(countries));
+        System.out.println(JSON.toJSONString(page));
         return JSON.toJSONString(page);
     }
 

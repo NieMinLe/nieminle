@@ -1,8 +1,9 @@
 package com.swaggertest.demo.service.impl;
 
-import com.swaggertest.demo.exception.MyException;
+import com.google.common.base.Preconditions;
 import com.swaggertest.demo.dao.TestMapper;
 import com.swaggertest.demo.entity.dto.TestDto;
+import com.swaggertest.demo.exception.MyException;
 import com.swaggertest.demo.service.testService;
 import java.util.List;
 import javax.annotation.Resource;
@@ -37,7 +38,8 @@ public class testServiceImpl implements testService {
     @Override
     public int update(TestDto testDto){
         if(testDto.getSex()!=null){
-            if(testDto.getSex().length()>1 || (!testDto.getSex().equals("男") && !testDto.getSex().equals("女"))){
+            Preconditions.checkArgument(testDto.getSex().length()==1 ,"性别只能为男或女a" );
+            if(!testDto.getSex().equals("男") && !testDto.getSex().equals("女")){
                 throw new MyException("性别只能为男或女");
             }
         }
