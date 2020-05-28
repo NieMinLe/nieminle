@@ -2,7 +2,7 @@ package com.swaggertest.demo;
 
 import com.alibaba.fastjson.JSON;
 import com.swaggertest.demo.entity.dto.TestDto;
-import com.swaggertest.demo.service.testService;
+import com.swaggertest.demo.service.TestService;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DemoApplicationTests {
 
     @Autowired
-    private testService testService;
+    private TestService testService;
 
     @Test
     public void queryTest() {

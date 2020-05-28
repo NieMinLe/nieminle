@@ -4,7 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.swaggertest.demo.entity.dto.TestDto;
-import com.swaggertest.demo.service.testService;
+import com.swaggertest.demo.service.TestService;
+import com.swaggertest.demo.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -21,14 +22,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 @Api(value = "testController", tags = "简单测试")
-public class testController {
+public class TestController {
 
     @Autowired
-    private testService testService;
+    private TestService testService;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     @ApiOperation("查询表所有数据")
     @GetMapping("/query")
     public List<TestDto> query(){
+        // redisUtil.setCache("three","you is women");
+        // redisUtil.setCacheExpireTime("three","you is wo",2L, TimeUnit.HOURS);
+        Object a = redisUtil.getCacheObject("first");
+        System.out.println("keya==="+a);
         return testService.query();
     }
 

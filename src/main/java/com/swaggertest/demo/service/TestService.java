@@ -3,7 +3,7 @@ package com.swaggertest.demo.service;
 import com.swaggertest.demo.entity.dto.TestDto;
 import java.util.List;
 
-public interface testService {
+public interface TestService {
 
     List<TestDto> query();
 

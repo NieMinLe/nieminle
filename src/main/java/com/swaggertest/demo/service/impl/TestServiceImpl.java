@@ -4,13 +4,13 @@ import com.google.common.base.Preconditions;
 import com.swaggertest.demo.dao.TestMapper;
 import com.swaggertest.demo.entity.dto.TestDto;
 import com.swaggertest.demo.exception.MyException;
-import com.swaggertest.demo.service.testService;
+import com.swaggertest.demo.service.TestService;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service
-public class testServiceImpl implements testService {
+public class TestServiceImpl implements TestService {
 
     @Resource
     private TestMapper testMapper;
