@@ -1,8 +1,15 @@
 package com.swaggertest.demo.exception;
 
 public class MyException extends RuntimeException {
-    public MyException(String msg){
-        super(msg);
+
+    private String msg;
+
+    private String code;
+
+    public MyException(String msg,String code){
+        this.msg = msg;
+
+        this.code = code;
     }
 
 }

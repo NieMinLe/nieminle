@@ -1,4 +1,4 @@
-package com.swaggertest.demo.swagger;
+package com.swaggertest.demo.config;
 
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;

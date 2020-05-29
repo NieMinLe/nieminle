@@ -1,4 +1,4 @@
-package com.swaggertest.demo.entity.dto;
+package com.swaggertest.demo.entity.po;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @Table(name = "first")
 @ApiModel(value = "查询所有DTO")
-public class TestDto implements Serializable {
+public class TestPo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(name = "Sno",value = "编号", dataType = "Integer")
@@ -30,4 +30,6 @@ public class TestDto implements Serializable {
     @ApiModelProperty(name = "Sdept",value = "部门（长度4）", dataType = "String")
     private String  Sdept;
 
+    @ApiModelProperty(name = "level",value = "权限等级", dataType = "Intefg")
+    private Integer level;//用户等级: 0-超级管理员
 }
