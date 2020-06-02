@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <script th:src="@{/js/jquery-3.4.1.min.js}" src="js/jquery-3.4.1.min.js"></script>
+  <script th:src="@{/js/jquery-3.4.1.min.js}" src="../static/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
@@ -16,10 +16,11 @@
   <!--请确认密码：<input type="text" name="repassword"><br>-->
   <input type="submit" value="注册"><hr>
 </form>
-<!--<input type="text" name="username" id="username">-->
-<!--<input type="text" name="password" id="password">-->
 
-<!--<button onclick="ajaxSubmit()">提交</button>-->
+<input type="text" name="username" id="username">
+<input type="text" name="password" id="password">
+
+<button onclick="ajaxSubmit()">注册</button>
 
 <H3>登录测试：</H3>
 <form method="post" action="/login">
@@ -36,17 +37,18 @@
 
     console.log(username+"chong分割符号"+password)
 
-    return ;
     $.ajax({
       url: "/insertUser",
       type: 'post',
       dataType: 'json',
-      contentType: 'application/json',
-      data: {username : username,password : password},
+      contentType: 'application/json;charset=UTF-8',
+      data: JSON.stringify({username : username,password : password}), //JSON.stringify转JSON字符串
       async: true,  //是否异步
       success: function(data){
-        if(data != null){
-          alert("are you ok?");
+        if(data == "1"){
+          alert("一切顺利");
+        }else{
+          alert("注册出错");
         }
       }
       // ,beforeSend:function(){

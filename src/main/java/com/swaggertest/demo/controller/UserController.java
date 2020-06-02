@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @CrossOrigin
@@ -30,10 +31,20 @@ public class UserController {
 
     @ApiOperation("用户注册")
     @PostMapping(value = "/insertUser")
-    public String insert(UserPo user){
-        userService.insertUser(user);
-        System.out.println("进来");
-        return "success.html";
+    public String insert(@RequestBody UserPo userPo,Model model){
+
+        if (userPo.getUsername() != null && userPo.getPassword() != null){
+            // UserPo user = new UserPo();
+            // user.setUsername(username);
+            // user.setPassword(password);
+
+            userService.insertUser(userPo);
+            model.addAttribute("pass",1);
+            return "1";
+        }
+
+        return "0";
+
     }
 
     @ApiOperation("用户登录")

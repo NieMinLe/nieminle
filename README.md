@@ -2,7 +2,7 @@
 - 技术：
 - mybatis、tk.mybatis、swagger2、lombok、fastJson
 - 自定义exception、commons.lang3校验、PageHelper
-- thymeleaf页面、
+- thymeleaf、
 ## 注意事项
 - [斗鱼](https://www.douyu.com/directory/all)
 - [虎牙](https://www.huya.com/l)
