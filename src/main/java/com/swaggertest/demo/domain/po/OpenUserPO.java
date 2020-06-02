@@ -10,13 +10,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @Author LIZEJIN
- * @Description TODO
- * @Date 2020/5/6
- * @Time 15:49
- * @Version V1.0.0
- */
 @Builder
 @Data
 @Table(name = "t_open_user")

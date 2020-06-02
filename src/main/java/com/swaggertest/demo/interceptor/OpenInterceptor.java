@@ -14,13 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * @Author LIZEJIN
- * @Description TODO
- * @Date 2020/5/7
- * @Time 17:29
- * @Version V1.0.0
- */
 @Slf4j
 @Component
 public class OpenInterceptor implements HandlerInterceptor {

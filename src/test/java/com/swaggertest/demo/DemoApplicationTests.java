@@ -2,14 +2,17 @@ package com.swaggertest.demo;
 
 import com.alibaba.fastjson.JSON;
 import com.swaggertest.demo.domain.dto.TestDto;
+import com.swaggertest.demo.domain.po.TestPo;
 import com.swaggertest.demo.service.TestService;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.xmlunit.validation.JAXPValidator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = DemoApplication.class)
@@ -68,18 +71,25 @@ public class DemoApplicationTests {
 
     @Test
     public void mytest() {
-        System.out.println("this is my test");
+        TestPo testPo = new TestPo();
+        TestDto testDto = new TestDto();
+        testDto.setSex("男");
+        testDto.setSname("男人");
+        testDto.setSage(13);
+        testDto.setSdept("java");
+        testDto.setSno(10);
+
+        System.out.println(testPo);
+        System.out.println(testDto);
+
+        BeanUtils.copyProperties(testDto,testPo);
+
+        System.out.println(testPo);
+        System.out.println(testDto);
+
     }
 
-    @Test
-    public void test2() {
-        System.out.println("this is test2a");
-    }
 
-    @Test
-    public void test3() {
-        System.out.println("还有我");
-    }
 
 }
 

@@ -13,13 +13,6 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-/**
- * @Author LIZEJIN
- * @Description TODO
- * @Date 2020/1/17
- * @Time 10:09
- * @Version V1.0.0
- */
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
   /**

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>添加用户</title>
-  <script th:src="@{/js/jquery-1.8.0.min.js}"></script>
+  <script th:src="@{../js/jquery-3.4.1.min.js}" src="../js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 <h2>我是添加页面</h2>
@@ -21,7 +21,7 @@
   function goadd() {
     var name = $("#name").val();
     var age = $("#age").val();
-    $.post("/addUser",{name:name,age:age,sex:sex},function (res) {
+    $.post("/insertUser",{username:name,password:age,sex:sex},function (res) {
       if (res==true){
         alert("添加成功")
         window.location.href ="/index";

@@ -30,7 +30,7 @@ public class UserController {
 
     @ApiOperation("用户注册")
     @PostMapping(value = "/insertUser")
-    public String insert(UserPo user,String repassword){
+    public String insert(UserPo user){
         userService.insertUser(user);
         System.out.println("进来");
         return "success.html";

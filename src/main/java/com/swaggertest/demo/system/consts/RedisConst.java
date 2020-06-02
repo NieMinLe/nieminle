@@ -1,12 +1,5 @@
 package com.swaggertest.demo.system.consts;
 
-/**
- * @Author LIZEJIN
- * @Description TODO
- * @Date 2020/5/7
- * @Time 9:59
- * @Version V1.0.0
- */
 public class RedisConst {
 
 
@@ -18,6 +11,7 @@ public class RedisConst {
 
   //用户id与密钥对
   public static String USER_ID_KEYPAIR_CACHE_KEY = "data_open::user_id_keypair_cache_key::%s";
+
   //用户id与通行证
   public static String USER_ID_ACCESS_CACHE_KEY = "data_open::user_id_access_cache_key::%s";
 
