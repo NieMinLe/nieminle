@@ -2,7 +2,7 @@ package com.swaggertest.demo.service.impl;
 
 import com.google.common.base.Preconditions;
 import com.swaggertest.demo.dao.TestMapper;
-import com.swaggertest.demo.entity.dto.TestDto;
+import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.exception.IsException;
 import com.swaggertest.demo.service.TestService;
 import java.util.List;

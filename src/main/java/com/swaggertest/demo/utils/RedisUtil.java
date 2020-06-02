@@ -1,7 +1,7 @@
 package com.swaggertest.demo.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.swaggertest.demo.entity.dto.RedisDTO;
+import com.swaggertest.demo.domain.dto.RedisDTO;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;

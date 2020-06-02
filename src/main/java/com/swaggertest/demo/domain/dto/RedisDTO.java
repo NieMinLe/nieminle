@@ -1,4 +1,4 @@
-package com.swaggertest.demo.entity.dto;
+package com.swaggertest.demo.domain.dto;
 
 import java.util.concurrent.TimeUnit;
 import lombok.AllArgsConstructor;

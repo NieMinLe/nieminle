@@ -7,7 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 public class LoginHandlerInterceptor implements HandlerInterceptor {
-    // 目标方法执行之前
+    /**
+     * 请求执行前执行
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Object user = request.getSession().getAttribute("loginUser");

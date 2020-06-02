@@ -1,6 +1,6 @@
 package com.swaggertest.demo.service;
 
-import com.swaggertest.demo.entity.dto.TestDto;
+import com.swaggertest.demo.domain.dto.TestDto;
 import java.util.List;
 
 public interface TestService {

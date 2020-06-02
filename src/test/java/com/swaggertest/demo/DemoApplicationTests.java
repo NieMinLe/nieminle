@@ -1,7 +1,7 @@
 package com.swaggertest.demo;
 
 import com.alibaba.fastjson.JSON;
-import com.swaggertest.demo.entity.dto.TestDto;
+import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.service.TestService;
 import java.util.List;
 import org.junit.Test;

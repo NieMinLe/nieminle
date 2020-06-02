@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.swaggertest.demo.dao.TestMapper">
     <!--通过明细模糊查询-->
-    <select id="queryLikeName" resultType="com.swaggertest.demo.entity.dto.TestDto" parameterType="string">
+    <select id="queryLikeName" resultType="com.swaggertest.demo.domain.dto.TestDto" parameterType="string">
         select * from first f1 where f1.Sname like CONCAT('%',#{Sname},'%')
     </select>
 </mapper>

@@ -1,7 +1,7 @@
 package com.swaggertest.demo.aop;
 
 import com.alibaba.fastjson.JSONObject;
-import com.swaggertest.demo.entity.dto.TestDto;
+import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.exception.MyException;
 import com.swaggertest.demo.system.consts.RedisConst;
 import com.swaggertest.demo.system.enums.EnumDataOpenCode;

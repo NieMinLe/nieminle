@@ -1,6 +1,6 @@
 package com.swaggertest.demo.dao;
 
-import com.swaggertest.demo.entity.dto.TestDto;
+import com.swaggertest.demo.domain.dto.TestDto;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;

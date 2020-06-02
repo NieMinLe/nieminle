@@ -3,7 +3,7 @@ package com.swaggertest.demo.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.swaggertest.demo.entity.dto.TestDto;
+import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.utils.RedisUtil;
 import io.swagger.annotations.Api;
