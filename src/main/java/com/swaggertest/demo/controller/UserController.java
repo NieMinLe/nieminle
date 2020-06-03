@@ -10,8 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @CrossOrigin
@@ -30,32 +31,27 @@ public class UserController {
     }
 
     @ApiOperation("用户注册")
-    @PostMapping(value = "/insertUser")
-    public String insert(@RequestBody UserPo userPo,Model model){
-
+    @RequestMapping(value = "/insertUser")
+    @ResponseBody
+    public Integer insert(@RequestBody UserPo userPo){
         if (userPo.getUsername() != null && userPo.getPassword() != null){
-            // UserPo user = new UserPo();
-            // user.setUsername(username);
-            // user.setPassword(password);
-
             userService.insertUser(userPo);
-            model.addAttribute("pass",1);
-            return "1";
+            return 1;
         }
 
-        return "0";
-
+        return 0;
     }
 
     @ApiOperation("用户登录")
-    @PostMapping("/login")
-    public String login(UserPo user) {
+    @RequestMapping("/login")
+    @ResponseBody
+    public Integer login(@RequestBody UserPo user) {
         System.out.println("表现层：用户登录");
         // 调用注入的 usersService 调用 login 方法
         if(userService.login(user)){
-            return "successlogin.html";
+            return 1;
         }else{
-            return "falselogin.html";
+            return 0;
         }
     }
 
