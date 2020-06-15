@@ -1,12 +1,5 @@
 package com.swaggertest.demo.system.consts;
 
-/**
- * @Author LIZEJIN
- * @Description TODO
- * @Date 2020/5/7
- * @Time 15:38
- * @Version V1.0.0
- */
 public class AlgorithmConst {
 
   public static final String  ALGORITHM_RSA = "RSA";

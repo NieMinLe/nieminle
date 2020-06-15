@@ -2,11 +2,6 @@ package com.swaggertest.demo.system.enums;
 
 import lombok.Getter;
 
-/**
- * @Author: lqc
- * @Date: 2019/8/23 11:12
- * @Description:
- */
 @Getter
 public enum EnumDataOpenCode  {
 

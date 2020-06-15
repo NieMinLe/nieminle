@@ -5,10 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
-/**
- * @Description: 测试Mapper
- * @author 野乐 2020/4/29 - 15:05
- **/
 @Repository
 public interface TestMapper extends Mapper<TestDto> {
 

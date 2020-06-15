@@ -2,8 +2,6 @@ package com.swaggertest.demo.system.enums;
 
 /**
  * 审核状态
- *
- * @author 刘昆伦
  **/
 public enum EnumApplyStatus {
     //（1待审批、2审批中、3审批通过、4审批不通过、9已撤销）
