@@ -2,13 +2,17 @@ package com.swaggertest.demo;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.domain.po.TestPo;
 import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.system.enums.EnumApplyStatus;
+import io.swagger.models.auth.In;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeanUtils;
@@ -124,8 +128,51 @@ public class DemoApplicationTests {
 
     }
 
+    @Test
+    public void test5(){
+        TestDto updateVisitTaskMessageBody = new TestDto();
+        updateVisitTaskMessageBody.setSno(1);
+        updateVisitTaskMessageBody.setSdept("JAVA");
+        updateVisitTaskMessageBody.setSage(13);
+        updateVisitTaskMessageBody.setSname("名字");
+        updateVisitTaskMessageBody.setSex("女");
+
+        String jsob = JSONObject.toJSONString(updateVisitTaskMessageBody);
+        String js = JSON.toJSONString(updateVisitTaskMessageBody);
+
+
+        System.out.println(jsob);
+
+    }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
