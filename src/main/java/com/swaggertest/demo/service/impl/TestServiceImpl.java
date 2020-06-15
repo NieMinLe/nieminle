@@ -6,13 +6,13 @@ import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.exception.IsException;
 import com.swaggertest.demo.service.TestService;
 import java.util.List;
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TestServiceImpl implements TestService {
 
-    @Resource
+    @Autowired
     private TestMapper testMapper;
 
     @Override
