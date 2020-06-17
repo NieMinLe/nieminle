@@ -5,6 +5,7 @@ import com.swaggertest.demo.dao.TestMapper;
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.exception.IsException;
 import com.swaggertest.demo.service.TestService;
+import com.swaggertest.demo.system.enums.EnumApplyStatus;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class TestServiceImpl implements TestService {
         if(testDto.getSex()!=null){
             Preconditions.checkArgument(testDto.getSex().length()==1 ,"性别只能为男或女a" );
             if(!testDto.getSex().equals("男") && !testDto.getSex().equals("女")){
-                throw new IsException("性别只能为男或女");
+                throw new IsException(EnumApplyStatus.APPROVAL_IN.getStatus(),"性别只能为男或女");
             }
         }
         return testMapper.updateByPrimaryKeySelective(testDto);

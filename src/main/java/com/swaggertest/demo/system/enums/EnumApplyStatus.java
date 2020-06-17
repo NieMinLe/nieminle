@@ -56,14 +56,17 @@ public enum EnumApplyStatus {
      * @return 被查询数值是正确的枚举值时，返回对应的枚举值，否则返回null.
      */
     public static EnumApplyStatus valueOfCode(Integer status) {
-        if (status == null) {
-            return null;
-        }
         for (EnumApplyStatus item : EnumApplyStatus.values()) {
-            if (item.status.equals(status)) {
+            if (item.getStatus().equals(status)) {
                 return item;
             }
         }
         return null;
     }
+
+    public static String getName(Integer status){
+        EnumApplyStatus enumApplyStatus = valueOfCode(status);
+        return enumApplyStatus == null ? "":enumApplyStatus.getDesc();
+    }
+
 }
