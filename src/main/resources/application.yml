@@ -17,7 +17,15 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML5
+  activemq:
+    broker-url: tcp://127.0.0.1:61616
+    password: admin
+    user: admin
+  jms:
+    pub-sub-domain: false # false = Queue true = Topic
 
+# 自己定义的队列名称
+myqueue: boot-activemq-queue
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml

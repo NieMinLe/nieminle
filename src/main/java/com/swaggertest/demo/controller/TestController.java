@@ -5,6 +5,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.service.TestService;
+import com.swaggertest.demo.servlet.MyRunnable;
+import com.swaggertest.demo.servlet.MyThread;
 import com.swaggertest.demo.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -104,5 +107,23 @@ public class TestController {
         System.out.println(JSON.toJSONString(page));
         return JSON.toJSONString(page);
     }
+
+    @GetMapping("/thread")
+    @ApiOperation("继承Thread接口线程")
+    public String thread(){
+        //start启动线程
+        new MyThread().start();
+        return "thread";
+    }
+
+    @GetMapping("/runnable")
+    @ApiOperation("实现Runnable方法线程")
+    public String runnable(){
+        //new 一个runnable，start任务
+        MyRunnable a=  new MyRunnable();
+        new  Thread(a).start();
+        return "runnable";
+    }
+
 
 }
