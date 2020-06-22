@@ -12,6 +12,7 @@ import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.system.enums.EnumApplyStatus;
 import io.swagger.models.auth.In;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -227,6 +228,81 @@ public class DemoApplicationTests {
         //麻烦给我的爱人来一杯mojito多少年后
         System.out.println(xiaoshi+"小时");
 
+
+    }
+
+    /**
+     * 循环map，entrySet,
+     */
+    @Test
+    public void test11(){
+        Map<Integer,String> map = new HashMap<>();
+
+        map.put(1,"1");
+        map.put(2,"2");
+        map.put(3,"3");
+        map.put(4,"4");
+        map.put(5,"5");
+
+        map.forEach((k,v) ->{
+            System.out.println("k:v="+k+":"+v);
+        });
+
+        map.entrySet().forEach(v ->{
+            System.out.println("k:v="+v.getKey()+":"+v.getValue()+"::::::::::::::::::::::::::"+v);
+        });
+
+        for (Map.Entry<Integer,String> v: map.entrySet()) {
+            System.out.println("map=k:v"+v.getKey()+":"+v.getValue());
+        }
+
+        for (String value:map.values()) {
+            System.out.println("value=="+value);
+        }
+
+    }
+
+    @Test
+    public void test12(){
+
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+
+        List<Long> longList = list.stream().distinct().map(Integer::longValue).collect(Collectors.toList());
+
+        System.out.println("longlista=="+JSONArray.toJSONString(longList));
+
+        list.forEach(v ->{
+            System.out.println(v);
+        });
+
+        list.stream().anyMatch(s ->{
+            System.out.println("anyMatch"+s);
+            return s.equals(5);
+        });
+
+        list.stream().filter(v ->{
+            System.out.println("filter"+v);
+            return v.equals(5);
+        }).findAny();
+
+    }
+
+    @Test
+    public void test13(){
+        List<String> sa = Arrays.asList("a","b","c","d","",null);
+        //list去空
+        List sa1 =  sa.stream().filter(StringUtils::isNotEmpty).collect(Collectors.toList());
+        List sa2 = sa.stream().filter(StringUtils::isNotBlank).collect(Collectors.toList());
+
+        System.out.println(sa);
+        System.out.println(sa1);
+        System.out.println(sa2);
 
     }
 
