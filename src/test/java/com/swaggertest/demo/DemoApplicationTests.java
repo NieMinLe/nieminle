@@ -1,6 +1,5 @@
 package com.swaggertest.demo;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -10,14 +9,15 @@ import com.swaggertest.demo.domain.po.TestPo;
 import com.swaggertest.demo.domain.po.UserPo;
 import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.system.enums.EnumApplyStatus;
-import io.swagger.models.auth.In;
+import com.swaggertest.demo.utils.DateUtils;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.apache.catalina.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.assertj.core.util.Lists;
@@ -211,23 +211,20 @@ public class DemoApplicationTests {
 
     @Test
     public void test10(){
-        Long ru = 1592287540000L;
+        Long ru = 1592870449000L;
         Long now = System.currentTimeMillis();
 
         Long xianzai = now - ru;
 
         Long xiaoshi = xianzai/1000/60/60;
 
-        if(xiaoshi>24){
+        if(xiaoshi.intValue()>24){
             Long tian = (xiaoshi/24);
             Long shi = xiaoshi - tian*24;
             System.out.println(tian+"天"+shi+"小时");
         }else{
             System.out.println(xiaoshi+"小时");
         }
-        //麻烦给我的爱人来一杯mojito多少年后
-        System.out.println(xiaoshi+"小时");
-
 
     }
 
@@ -264,7 +261,7 @@ public class DemoApplicationTests {
 
     @Test
     public void test12(){
-
+        List<List<Integer>> listList = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
@@ -272,8 +269,14 @@ public class DemoApplicationTests {
         list.add(4);
         list.add(5);
         list.add(6);
+        listList.add(list);
+        System.out.println(listList);
+        list.add(7);
+        System.out.println(listList);
+
 
         List<Long> longList = list.stream().distinct().map(Integer::longValue).collect(Collectors.toList());
+        // List<Integer> intList = longList.stream().mapToInt(Long::intValue).boxed().collect(Collectors.toList());
 
         System.out.println("longlista=="+JSONArray.toJSONString(longList));
 
@@ -305,6 +308,37 @@ public class DemoApplicationTests {
         System.out.println(sa2);
 
     }
+
+    @Test
+    public void test14(){
+        Long now = System.currentTimeMillis();
+        Date da = DateUtils.formatDateEnd(now);
+
+        System.out.println(da);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String daString = simpleDateFormat.format(da);
+
+        System.out.println(daString);
+
+
+    }
+
+    @Test
+    public void test15(){
+
+        System.out.println(Integer.MAX_VALUE*4);
+        System.out.println(Integer.MIN_VALUE*4);
+        String run = "areyouok.goodman";
+
+        List list = Arrays.asList(run.split("."));
+
+        System.out.println(list);
+
+
+    }
+
 
 
 }
