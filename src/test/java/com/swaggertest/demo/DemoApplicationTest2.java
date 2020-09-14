@@ -1,5 +1,9 @@
 package com.swaggertest.demo;
 
+import com.alibaba.fastjson.JSON;
+import com.swaggertest.demo.utils.DateUtil;
+import java.util.List;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +26,27 @@ public class DemoApplicationTest2 {
         System.out.println(stringBuffer2);
 
     }
+
+    @Test
+    public void test1(){
+
+        Long startTime = DateUtil.dayToDayStart30(System.currentTimeMillis());
+        Long endTime = DateUtil.dealDayToDayEnd(System.currentTimeMillis());
+        System.out.println(startTime);
+        System.out.println(endTime);
+    }
+
+    @Test
+    public void test2(){
+        List<Integer> rejectTypes = Lists.newArrayList(20,10,9,8);
+        String test = JSON.toJSONString(rejectTypes);
+
+        System.out.println(rejectTypes);
+        System.out.println(rejectTypes.toString());
+        System.out.println(test);
+
+    }
+
 
 
 
