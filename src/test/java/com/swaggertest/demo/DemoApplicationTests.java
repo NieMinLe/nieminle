@@ -40,7 +40,9 @@ public class DemoApplicationTests {
     @Test
     public void queryTest() {
         List<TestDto> testDtoList = testService.query();
-        System.out.println(JSON.toJSON(testDtoList));
+
+        Map<Integer,List<TestDto>> test = testDtoList.stream().collect(Collectors.groupingBy(TestDto::getSage));
+        System.out.println(JSONObject.toJSONString(test));
     }
 
     @Test
