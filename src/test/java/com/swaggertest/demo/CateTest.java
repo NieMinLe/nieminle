@@ -20,9 +20,8 @@ public class CateTest {
     @Test
     public void queryTest1() {
         System.out.println(JSONObject.toJSONString(cateService.threeLevelPullDown()));
-        //12312312312312
-    }
 
+    }
 
 }
 
