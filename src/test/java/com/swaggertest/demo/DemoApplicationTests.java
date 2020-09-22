@@ -140,18 +140,27 @@ public class DemoApplicationTests {
 
     @Test
     public void test5(){
-        TestDto updateVisitTaskMessageBody = new TestDto();
-        updateVisitTaskMessageBody.setSno(1);
-        updateVisitTaskMessageBody.setSdept("JAVA");
-        updateVisitTaskMessageBody.setSage(13);
-        updateVisitTaskMessageBody.setSname("名字");
-        updateVisitTaskMessageBody.setSex("女");
+        List<TestDto> list1 = new ArrayList<>();
+        TestDto t1 = new TestDto();
+        t1.setSdept("JAVA");
+        t1.setSage(13);
+        TestDto t2 = new TestDto();
+        t2.setSdept("C++");
+        t2.setSage(13);
+        TestDto t3 = new TestDto();
+        t3.setSdept("GOODMAN");
+        t3.setSage(14);
 
-        String jsob = JSONObject.toJSONString(updateVisitTaskMessageBody);
-        String js = JSON.toJSONString(updateVisitTaskMessageBody);
+        list1.add(t1);
+        list1.add(t2);
+        list1.add(t3);
+
+        List<Integer> a1 = list1.stream().map(TestDto::getSage).distinct().collect(Collectors.toList());
+
+        System.out.println(a1);
 
 
-        System.out.println(jsob);
+
 
     }
 

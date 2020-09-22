@@ -83,6 +83,16 @@ public class DemoApplicationTest2 {
 
     }
 
+    @Test
+    public void test4(){
+        List<Integer> test = Lists.newArrayList(1,2,3);
+        List<Integer> test2 = Lists.newArrayList(2,3,4);
+        test.addAll(test2);
+        test = test.stream().distinct().collect(Collectors.toList());
+        System.out.println(test);
+
+    }
+
 
 
 
