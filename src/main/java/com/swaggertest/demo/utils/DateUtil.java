@@ -1,8 +1,6 @@
 package com.swaggertest.demo.utils;
 
 import java.util.Calendar;
-import java.util.Date;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression.DateTime;
 
 /**
  * @Author LIZEJIN

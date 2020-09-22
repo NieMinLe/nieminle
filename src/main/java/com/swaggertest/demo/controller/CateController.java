@@ -3,6 +3,8 @@ package com.swaggertest.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.swaggertest.demo.domain.dto.CateDTO;
 import com.swaggertest.demo.service.CateService;
+import com.swaggertest.demo.webApi.ApiResult;
+import com.swaggertest.demo.webApi.ResultCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -22,9 +24,38 @@ public class CateController {
 
     @ApiOperation("查询科目的三级下拉")
     @GetMapping("/threeLevelPullDown")
-    public List<CateDTO> threeLevelPullDown(){
-        System.out.println(JSONObject.toJSONString(cateService.threeLevelPullDown()));
-        return cateService.threeLevelPullDown();
+    public ApiResult threeLevelPullDown(){
+        List<CateDTO> list = cateService.threeLevelPullDown();
+        return ApiResult.success(list);
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
