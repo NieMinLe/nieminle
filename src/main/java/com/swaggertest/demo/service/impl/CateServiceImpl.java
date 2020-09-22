@@ -39,18 +39,18 @@ public class CateServiceImpl implements CateService {
         }else{
 
             List<CatePO> lister = cateDao.threeLevelPullDown(pidList);
-            lister.forEach(v -> v.setDrillDown(drillDown));
             if(null == lister){
                 return list;
             }
+            lister.forEach(v -> v.setDrillDown(drillDown));
 
             Map<Long,List<CatePO>> map = lister.stream().collect(Collectors.groupingBy(CatePO::getPid));
 
             list.forEach(v ->{
                 map.forEach((key,value) ->{
                     if(v.getSubjectId().equals(key)){
-                        value.forEach(v2 -> v2.setDrillDown(drillDown));
                         v.setLowerLevel(value);
+                        value.forEach(v2 -> v2.setDrillDown(drillDown));
                         threeLevelPullDownToMapper(value,value.stream().map(CatePO::getSubjectId).collect(Collectors.toList()), next(drillDown));
                     }
                 });
