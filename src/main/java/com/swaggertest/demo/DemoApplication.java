@@ -1,6 +1,5 @@
 package com.swaggertest.demo;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jms.annotation.EnableJms;
@@ -12,7 +11,6 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableAsync
 @MapperScan("com.swaggertest.demo.dao")
 @EnableSwagger2
-@Slf4j
 @EnableJms
 public class DemoApplication{
 

@@ -1,10 +1,8 @@
 package com.swaggertest.demo.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.swaggertest.demo.domain.dto.CateDTO;
 import com.swaggertest.demo.service.CateService;
 import com.swaggertest.demo.webApi.ApiResult;
-import com.swaggertest.demo.webApi.ResultCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
