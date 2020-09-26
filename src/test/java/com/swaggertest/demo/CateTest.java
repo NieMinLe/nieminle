@@ -2,9 +2,9 @@ package com.swaggertest.demo;
 
 import com.alibaba.fastjson.JSONObject;
 import com.swaggertest.demo.service.CateService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,6 +52,19 @@ public class CateTest {
         List<Long> list2 = Lists.newArrayList(11L,30L,40L);
         list1.retainAll(list2);
         System.out.print(list1);
+    }
+
+    @Test
+    public void test3(){
+        List<String> strings = Lists.newArrayList("abc", "","bc","efg","abcd","","jkl");
+        List<String> filtered = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
+
+        System.out.println("筛选列表: " + filtered);
+
+        String mergedString = strings.stream().filter(v -> StringUtils.isNotBlank(v)).collect(Collectors.joining(","));
+        System.out.println("合并字符串: " + mergedString);
+
+
     }
 
 }

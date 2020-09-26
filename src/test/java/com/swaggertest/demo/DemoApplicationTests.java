@@ -155,10 +155,12 @@ public class DemoApplicationTests {
         list1.add(t2);
         list1.add(t3);
 
-        List<Integer> a1 = list1.stream().map(TestDto::getSage).distinct().collect(Collectors.toList());
+        List<Integer> a1 = list1.stream().sorted((x,y) -> y.getSage() - x.getSage()).map(TestDto::getSage).distinct().collect(Collectors.toList());
+
+        Integer a2 = list1.stream().mapToInt(TestDto::getSage).distinct().sum();
 
         System.out.println(a1);
-
+        System.out.println(a2);
 
 
 
