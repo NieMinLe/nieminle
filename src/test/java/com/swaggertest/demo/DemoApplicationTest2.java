@@ -38,13 +38,12 @@ public class DemoApplicationTest2 {
 
     @Test
     public void test1() throws ParseException {
-        String day = "2020-02-04";
-        Calendar c = Calendar.getInstance();
+        String day = "2001-02-04";
         Date date = null;
         try {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(day);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        }catch (ParseException e){
+            throw e;
         }
         System.out.println(DateUtil.monthDay(date));
     }

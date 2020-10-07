@@ -19,6 +19,7 @@ public class TestServiceImpl implements TestService {
     private TestMapper testMapper;
 
     @Override
+    //轮询
     public List<TestDto> query(List<Long> snos) {
         int pageSize = 2;
         List<TestDto> studentIdList = new ArrayList<>();

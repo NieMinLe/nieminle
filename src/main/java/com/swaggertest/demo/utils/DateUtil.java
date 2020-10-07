@@ -74,7 +74,6 @@ public class DateUtil {
 
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH)+1;
-        int day = c.get(Calendar.DATE);
         int num = 0;
 
         switch (month) {
