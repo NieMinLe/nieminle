@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface TestService {
 
-    List<TestDto> query();
+    List<TestDto> query(List<Long> snos);
 
     TestDto queryOne(int id);
 

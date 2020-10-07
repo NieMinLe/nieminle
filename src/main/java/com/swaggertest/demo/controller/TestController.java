@@ -3,6 +3,7 @@ package com.swaggertest.demo.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.servlet.MyRunnable;
@@ -40,7 +41,7 @@ public class TestController {
         // redisUtil.setCacheExpireTime("three","you is wo",2L, TimeUnit.HOURS);
         // redisUtil.del("first");
         // redisUtil.del("three");
-        return testService.query();
+        return testService.query(Lists.newArrayList());
     }
 
     @GetMapping("/queryOne")
@@ -89,7 +90,7 @@ public class TestController {
     @ApiOperation("分页查询")
     public String findAllPage(Integer pageNum,Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<TestDto> countries = testService.query();
+        List<TestDto> countries = testService.query(Lists.newArrayList());
 
         PageInfo<TestDto> page = new PageInfo<>(countries);
         System.out.println("当前页：" + page.getPageNum());

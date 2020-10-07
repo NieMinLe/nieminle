@@ -3,10 +3,15 @@ package com.swaggertest.demo;
 import com.alibaba.fastjson.JSON;
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.utils.DateUtil;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,17 +37,21 @@ public class DemoApplicationTest2 {
     }
 
     @Test
-    public void test1(){
-
-        Long startTime = DateUtil.dayToDayStart30(System.currentTimeMillis());
-        Long endTime = DateUtil.dealDayToDayEnd(System.currentTimeMillis());
-        System.out.println(startTime);
-        System.out.println(endTime);
+    public void test1() throws ParseException {
+        String day = "2020-02-04";
+        Calendar c = Calendar.getInstance();
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(day);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println(DateUtil.monthDay(date));
     }
 
     @Test
-    public void test2(){
-        List<Integer> rejectTypes = Lists.newArrayList(20,10,9,8);
+    public void test2() {
+        List<Integer> rejectTypes = Lists.newArrayList(20, 10, 9, 8);
         String test = JSON.toJSONString(rejectTypes);
 
         System.out.println(rejectTypes);
@@ -52,7 +61,7 @@ public class DemoApplicationTest2 {
     }
 
     @Test
-    public void test3(){
+    public void test3() {
         List<TestDto> collect1 = new ArrayList<>();
         TestDto t1 = new TestDto();
         t1.setSname("我是1");
@@ -69,14 +78,15 @@ public class DemoApplicationTest2 {
         collect1.add(t2);
         collect1.add(t3);
         System.out.println(collect1);
-        collect1.forEach(v ->{
-            if(v.getSage() == null){
+        collect1.forEach(v -> {
+            if (v.getSage() == null) {
                 v.setSage(0);
             }
         });
 
         System.out.println(collect1);
-        List<TestDto> collect = collect1.stream().sorted(Comparator.comparingInt(TestDto::getSage).reversed()).collect(Collectors.toList());
+        List<TestDto> collect = collect1.stream().sorted(Comparator.comparingInt(TestDto::getSage).reversed())
+            .collect(Collectors.toList());
 
         System.out.println(collect);
 
@@ -84,16 +94,14 @@ public class DemoApplicationTest2 {
     }
 
     @Test
-    public void test4(){
-        List<Integer> test = Lists.newArrayList(1,2,3);
-        List<Integer> test2 = Lists.newArrayList(2,3,4);
+    public void test4() {
+        List<Integer> test = Lists.newArrayList(1, 2, 3);
+        List<Integer> test2 = Lists.newArrayList(2, 3, 4);
         test.addAll(test2);
         test = test.stream().distinct().collect(Collectors.toList());
         System.out.println(test);
 
     }
-
-
 
 
 }

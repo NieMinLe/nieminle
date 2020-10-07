@@ -5,4 +5,11 @@
     <select id="queryLikeName" resultType="com.swaggertest.demo.domain.dto.TestDto" parameterType="string">
         select * from first f1 where f1.Sname like CONCAT('%',#{Sname},'%')
     </select>
+
+    <select id="queryBySno" resultType="com.swaggertest.demo.domain.dto.TestDto" parameterType="long">
+        select distinct f1.Sage from first f1 where f1.sno in
+        <foreach collection="snos" open="(" item="sno" separator="," close=")">
+            #{sno}
+        </foreach>
+    </select>
 </mapper>

@@ -2,6 +2,9 @@ package com.swaggertest.demo;
 
 import com.alibaba.fastjson.JSONObject;
 import com.swaggertest.demo.service.CateService;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
@@ -63,10 +66,30 @@ public class CateTest {
 
         String mergedString = strings.stream().filter(v -> StringUtils.isNotBlank(v)).collect(Collectors.joining(","));
         System.out.println("合并字符串: " + mergedString);
-
-
     }
 
+    @Test
+    public void test4(){
+        List<Integer> numbers = Lists.newArrayList(3, 2, 1, 3, 10, 3, 5);
+        Integer max = numbers.stream().max(Comparator.comparingInt(Integer::intValue)).get();
+        Integer min = numbers.stream().min(Comparator.comparingInt(Integer::intValue)).get();
+        Integer sum = numbers.stream().mapToInt(Integer::intValue).sum();
+        double ave = numbers.stream().mapToInt(Integer::intValue).average().getAsDouble();
+        long count = numbers.stream().filter(v ->v == 3).count();
+        System.out.println(max);
+        System.out.println(min);
+        System.out.println(sum);
+        System.out.println(ave);
+        System.out.println(count);
+
+
+        IntSummaryStatistics stats = numbers.stream().mapToInt((x) -> x).summaryStatistics();
+
+        // System.out.println("列表中最大的数 : " + stats.getMax());
+        // System.out.println("列表中最小的数 : " + stats.getMin());
+        // System.out.println("所有数之和 : " + stats.getSum());
+        // System.out.println("平均数 : " + stats.getAverage());
+    }
 }
 
 

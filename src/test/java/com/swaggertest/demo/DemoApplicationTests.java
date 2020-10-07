@@ -39,7 +39,8 @@ public class DemoApplicationTests {
 
     @Test
     public void queryTest() {
-        List<TestDto> testDtoList = testService.query();
+        List<Long> snos = Lists.newArrayList(1L,2L,3L,4L,5L,7L,8L,9L);
+        List<TestDto> testDtoList = testService.query(snos);
 
         Map<Integer,List<TestDto>> test = testDtoList.stream().collect(Collectors.groupingBy(TestDto::getSage));
         System.out.println(JSONObject.toJSONString(test));
@@ -144,9 +145,11 @@ public class DemoApplicationTests {
         TestDto t1 = new TestDto();
         t1.setSdept("JAVA");
         t1.setSage(13);
+
         TestDto t2 = new TestDto();
         t2.setSdept("C++");
         t2.setSage(13);
+
         TestDto t3 = new TestDto();
         t3.setSdept("GOODMAN");
         t3.setSage(14);
@@ -155,12 +158,25 @@ public class DemoApplicationTests {
         list1.add(t2);
         list1.add(t3);
 
+        Map<Integer,String> testMap = list1.stream().collect(Collectors.toMap(TestDto::getSage, TestDto::getSdept, (k, v) -> k));
+        System.out.println(testMap);
+        testMap.forEach((k,v) ->{
+            if(k.equals(13)){
+                System.out.println(v);
+            }
+        });
+
+
+
+        Map<Integer,List<TestDto>> testMap1 = list1.stream().collect(Collectors.groupingBy(TestDto::getSage));
+        // System.out.println(testMap1);
+
         List<Integer> a1 = list1.stream().sorted((x,y) -> y.getSage() - x.getSage()).map(TestDto::getSage).distinct().collect(Collectors.toList());
 
         Integer a2 = list1.stream().mapToInt(TestDto::getSage).distinct().sum();
 
-        System.out.println(a1);
-        System.out.println(a2);
+        // System.out.println(a1);
+        // System.out.println(a2);
 
 
 
