@@ -1,17 +1,14 @@
 package com.swaggertest.demo;
 
-import com.alibaba.fastjson.JSON;
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.utils.DateUtil;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,12 +47,17 @@ public class DemoApplicationTest2 {
 
     @Test
     public void test2() {
-        List<Integer> rejectTypes = Lists.newArrayList(20, 10, 9, 8);
-        String test = JSON.toJSONString(rejectTypes);
-
-        System.out.println(rejectTypes);
-        System.out.println(rejectTypes.toString());
-        System.out.println(test);
+        String str = "12312&456&456";
+        System.out.println(str);
+        System.out.println("分割线-----------------------------------------");
+        str = str.replaceAll("&", "\n");
+        System.out.println(str);
+        // List<Integer> rejectTypes = Lists.newArrayList(20, 10, 9, 8);
+        // String test = JSON.toJSONString(rejectTypes);
+        //
+        // System.out.println(rejectTypes);
+        // System.out.println(rejectTypes.toString());
+        // System.out.println(test);
 
     }
 
