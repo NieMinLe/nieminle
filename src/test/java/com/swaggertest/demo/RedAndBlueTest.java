@@ -24,6 +24,7 @@ public class RedAndBlueTest {
             Integer blue = new Random().nextInt(16)+1;
             System.out.println("红球："+red);
             System.out.println("篮球："+blue);
+            //都属不限
         }
 
     }
