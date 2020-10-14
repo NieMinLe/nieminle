@@ -26,7 +26,6 @@ public class RedAndBlueTest {
             System.out.println("篮球："+blue);
         }
 
-        //我写一个不想要的代码
     }
 
 
