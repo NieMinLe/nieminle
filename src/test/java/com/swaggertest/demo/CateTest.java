@@ -27,6 +27,19 @@ public class CateTest {
     @Test
     public void queryTest1() {
         System.out.println(JSONObject.toJSONString(cateService.threeLevelPullDown()));
+        //List<DepartmentTreeDTO> digui(List<DepartmentTreeDTO> list ){
+        //         List<DepartmentTreeDTO> returnList = new ArrayList<>();
+        //         for(DepartmentTreeDTO dto : list){
+        //             if(dto.getState()==1){
+        //                 returnList.add(dto);
+        //                 List<DepartmentTreeDTO> childrenList = dto.getChildren();
+        //                 if(CollectionUtils.isNotEmpty(childrenList)){
+        //                     digui(childrenList);
+        //                 }
+        //             }
+        //         }
+        //         return returnList;
+        //     }
     }
 
     @Test

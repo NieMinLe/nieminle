@@ -104,6 +104,17 @@ public class DemoApplicationTest2 {
 
     }
 
+    @Test
+    public void test5(){
+        String content = "你有一条转课申请待审核，学员账号为：%s，申请转课的原订单号为：%s。请登录桃李系统，在转课管理查看并审核";
+
+        content = String.format(content,"t0340187210","D201006763168767302701056");
+
+        System.out.println(content);
+
+
+    }
+
 
 }
 
