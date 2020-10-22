@@ -350,8 +350,6 @@ public class DemoApplicationTests {
         String daString = simpleDateFormat.format(da);
 
         System.out.println(daString);
-
-
     }
 
     @Test

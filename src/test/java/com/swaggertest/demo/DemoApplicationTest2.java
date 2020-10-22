@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -114,6 +115,45 @@ public class DemoApplicationTest2 {
 
 
     }
+
+    @Test
+    public void test6(){
+        List<Long> list = new ArrayList<>();
+        if(CollectionUtils.isEmpty(list)){
+            System.out.println("里边是空的");
+        }
+
+        list.add(123L);
+        list.add(456L);
+        list.add(789L);
+
+        if(list.contains(123L)){
+            System.out.println("对的");
+        }
+
+    }
+
+    @Test
+    public void test7() throws ParseException{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = sdf.parse("2020-07-01 00:00:00");
+        System.out.println(now);
+    }
+
+    @Test
+    public void test8(){
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+        list.add(2);
+
+        System.out.println(list);
+        list.sort(Integer::compareTo);
+        System.out.println(list);
+
+    }
+
+
 
 
 }
