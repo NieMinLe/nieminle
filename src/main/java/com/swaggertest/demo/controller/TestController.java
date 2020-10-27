@@ -3,12 +3,12 @@ package com.swaggertest.demo.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Lists;
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.servlet.MyRunnable;
 import com.swaggertest.demo.servlet.MyThread;
 import com.swaggertest.demo.utils.RedisUtil;
+import com.swaggertest.demo.webApi.ApiResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,12 +39,14 @@ public class TestController {
 
     @ApiOperation("查询表所有数据")
     @GetMapping("/query")
-    public List<TestDto> query(){
+    public ApiResult query(Integer page,Integer limit){
         // redisUtil.setCache("three","you is women");
         // redisUtil.setCacheExpireTime("three","you is wo",2L, TimeUnit.HOURS);
         // redisUtil.del("first");
         // redisUtil.del("three");
-        return testService.query(Lists.newArrayList());
+        Integer index = (page - 1) * limit;
+        List<TestDto> list = testService.query(index,limit);
+        return ApiResult.success(list,testService.queryCount());
     }
 
     @GetMapping("/queryOne")
@@ -77,12 +82,12 @@ public class TestController {
         return testService.update(testDto);
     }
 
-    @DeleteMapping("/delete")
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     @ApiOperation("删除数据")
     @ApiImplicitParams(
         @ApiImplicitParam(name = "sno",value = "删除ID",required = true)
     )
-    public int delete(int sno){
+    public int delete(@RequestParam int sno){
         return testService.delete(sno);
     }
 
@@ -90,7 +95,7 @@ public class TestController {
     @ApiOperation("分页查询")
     public String findAllPage(Integer pageNum,Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<TestDto> countries = testService.query(Lists.newArrayList());
+        List<TestDto> countries = testService.query(1,2);
 
         PageInfo<TestDto> page = new PageInfo<>(countries);
         System.out.println("当前页：" + page.getPageNum());

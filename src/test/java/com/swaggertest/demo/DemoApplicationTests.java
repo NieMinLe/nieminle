@@ -40,7 +40,7 @@ public class DemoApplicationTests {
     @Test
     public void queryTest() {
         List<Long> snos = Lists.newArrayList(1L,2L,3L,4L,5L,7L,8L,9L);
-        List<TestDto> testDtoList = testService.query(snos);
+        List<TestDto> testDtoList = testService.query(1,2);
 
         Map<Integer,List<TestDto>> test = testDtoList.stream().collect(Collectors.groupingBy(TestDto::getSage));
         System.out.println(JSONObject.toJSONString(test));
@@ -373,6 +373,14 @@ public class DemoApplicationTests {
         System.out.println(ds);
         System.out.println(endDate);
         System.out.println(ds.getTime());
+
+    }
+
+    @Test
+    public void test17(){
+        List<Integer> list = new ArrayList<>();
+        System.out.println(list.size());
+
 
     }
 

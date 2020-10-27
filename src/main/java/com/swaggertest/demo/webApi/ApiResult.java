@@ -14,11 +14,14 @@ public class ApiResult {
 
 	    private Object data;
 
+	    private Integer count;
+
 	    public ApiResult() {}
 
-	    public ApiResult(Integer code, String msg) {
+	    public ApiResult(Integer code, String msg,Integer count) {
 	        this.code = code;
 	        this.msg = msg;
+	        this.count = count;
 	    }
 
 	    public static ApiResult success() {
@@ -27,10 +30,18 @@ public class ApiResult {
 	        return result;
 	    }
 
-	    public static ApiResult success(Object data) {
+	public static ApiResult success(Object data) {
+		ApiResult result = new ApiResult();
+		result.setResultCode(ResultCode.SUCCESS);
+		result.setData(data);
+		return result;
+	}
+
+	    public static ApiResult success(Object data,Integer count) {
 	        ApiResult result = new ApiResult();
 	        result.setResultCode(ResultCode.SUCCESS);
 	        result.setData(data);
+	        result.setCount(count);
 	        return result;
 	    }
 
@@ -75,6 +86,12 @@ public class ApiResult {
 		public void setData(Object data) {
 			this.data = data;
 		}
-	    
 
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 }

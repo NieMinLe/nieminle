@@ -5,7 +5,9 @@ import java.util.List;
 
 public interface TestService {
 
-    List<TestDto> query(List<Long> snos);
+    List<TestDto> query(Integer page,Integer limit);
+
+    Integer queryCount();
 
     TestDto queryOne(int id);
 

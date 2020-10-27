@@ -6,9 +6,7 @@ import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.exception.IsException;
 import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.system.enums.EnumApplyStatus;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,30 +17,39 @@ public class TestServiceImpl implements TestService {
     private TestMapper testMapper;
 
     @Override
-    //轮询
-    public List<TestDto> query(List<Long> snos) {
-        int pageSize = 2;
-        List<TestDto> studentIdList = new ArrayList<>();
-        if (snos.size() <= pageSize) {
-            studentIdList= testMapper.queryBySno(snos);
-        } else {
-            int pageIndex = 1;
-            int totalPage = snos.size() % pageSize == 0 ? snos.size() / pageSize : (snos.size() / pageSize + 1);
-            while (pageIndex <= totalPage) {
-                int fromIndex = (pageIndex - 1) * pageSize;
-                int toIndex = fromIndex + pageSize;
-                if (toIndex > snos.size()) {
-                    toIndex = snos.size();
-                }
-                List<Long> test = snos.subList(fromIndex, toIndex);
-                List<TestDto> onePageClassIds = testMapper.queryBySno(test);
-                studentIdList.addAll(onePageClassIds);
-                pageIndex++;
-            }
-            studentIdList = studentIdList.stream().distinct().collect(Collectors.toList());
-        }
-        return studentIdList;
+    public List<TestDto> query(Integer page,Integer limit){
+        return testMapper.queryAll(page,limit);
     }
+
+    @Override
+    public Integer queryCount(){
+        return testMapper.queryCount();
+    }
+
+    //轮询
+    // public List<TestDto> query() {
+    //     int pageSize = 2;
+    //     List<TestDto> studentIdList = new ArrayList<>();
+    //     if (snos.size() <= pageSize) {
+    //         studentIdList= testMapper.queryBySno(snos);
+    //     } else {
+    //         int pageIndex = 1;
+    //         int totalPage = snos.size() % pageSize == 0 ? snos.size() / pageSize : (snos.size() / pageSize + 1);
+    //         while (pageIndex <= totalPage) {
+    //             int fromIndex = (pageIndex - 1) * pageSize;
+    //             int toIndex = fromIndex + pageSize;
+    //             if (toIndex > snos.size()) {
+    //                 toIndex = snos.size();
+    //             }
+    //             List<Long> test = snos.subList(fromIndex, toIndex);
+    //             List<TestDto> onePageClassIds = testMapper.queryBySno(test);
+    //             studentIdList.addAll(onePageClassIds);
+    //             pageIndex++;
+    //         }
+    //         studentIdList = studentIdList.stream().distinct().collect(Collectors.toList());
+    //     }
+    //     return studentIdList;
+    // }
 
     @Override
     public TestDto queryOne(int id) {
