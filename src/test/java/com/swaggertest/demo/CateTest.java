@@ -1,6 +1,7 @@
 package com.swaggertest.demo;
 
 import com.alibaba.fastjson.JSONObject;
+import com.swaggertest.demo.domain.dto.First;
 import com.swaggertest.demo.service.CateService;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -102,6 +103,10 @@ public class CateTest {
         // System.out.println("列表中最小的数 : " + stats.getMin());
         // System.out.println("所有数之和 : " + stats.getSum());
         // System.out.println("平均数 : " + stats.getAverage());
+    }
+
+    @Test
+    public void test5(){
     }
 }
 

@@ -2,6 +2,7 @@ package com.swaggertest.demo;
 
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.utils.DateUtil;
+import com.swaggertest.demo.utils.MyUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -152,6 +153,14 @@ public class DemoApplicationTest2 {
         System.out.println(list);
 
     }
+
+    @Test
+    public void test9(){
+        //脱敏
+        String tuo = MyUtils.desensitizedPhoneNumber("1234");
+        System.out.println(tuo);
+    }
+
 
 
 

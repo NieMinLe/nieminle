@@ -10,13 +10,18 @@ import com.swaggertest.demo.domain.po.UserPo;
 import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.system.enums.EnumApplyStatus;
 import com.swaggertest.demo.utils.DateUtils;
+import io.swagger.models.auth.In;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -140,7 +145,7 @@ public class DemoApplicationTests {
     }
 
     @Test
-    public void test5(){
+    public void test5() {
         List<TestDto> list1 = new ArrayList<>();
         TestDto t1 = new TestDto();
         t1.setSdept("JAVA");
@@ -150,6 +155,10 @@ public class DemoApplicationTests {
         t2.setSdept("C++");
         t2.setSage(13);
 
+        TestDto t4 = new TestDto();
+        t4.setSdept("PHP");
+        t4.setSage(13);
+
         TestDto t3 = new TestDto();
         t3.setSdept("GOODMAN");
         t3.setSage(14);
@@ -157,31 +166,40 @@ public class DemoApplicationTests {
         list1.add(t1);
         list1.add(t2);
         list1.add(t3);
+        list1.add(t4);
 
-        Map<Integer,String> testMap = list1.stream().collect(Collectors.toMap(TestDto::getSage, TestDto::getSdept, (k, v) -> k));
-        System.out.println(testMap);
-        testMap.forEach((k,v) ->{
-            if(k.equals(13)){
-                System.out.println(v);
-            }
-        });
+        // Map<Integer,String> testMap = list1.stream().collect(Collectors.toMap(TestDto::getSage, TestDto::getSdept, (k, v) -> k));
+        // System.out.println(testMap);
 
-
-
-        Map<Integer,List<TestDto>> testMap1 = list1.stream().collect(Collectors.groupingBy(TestDto::getSage));
+        // Map<Integer,List<TestDto>> testMap1 = list1.stream().collect(Collectors.groupingBy(TestDto::getSage));
         // System.out.println(testMap1);
 
-        List<Integer> a1 = list1.stream().sorted((x,y) -> y.getSage() - x.getSage()).map(TestDto::getSage).distinct().collect(Collectors.toList());
+        Map<Integer, List<TestDto>> listMap = list1.stream().collect(Collectors.groupingBy(TestDto::getSage));
+        Map<Integer, String> map = list1.stream().collect(Collectors.toMap(TestDto::getSage, TestDto::getSdept, (k, z) -> z));
+        System.out.println(listMap);
+        System.out.println(map);
 
-        Integer a2 = list1.stream().mapToInt(TestDto::getSage).distinct().sum();
+        Integer sum = list1.stream().mapToInt(TestDto::getSage).sum();
+        Double average = list1.stream().mapToDouble(TestDto::getSage).average().getAsDouble();
+        Integer max = list1.stream().mapToInt(TestDto::getSage).max().getAsInt();
+        Integer min = list1.stream().mapToInt(TestDto::getSage).min().getAsInt();
+        System.out.println("sum============"+sum);
+        System.out.println("average=============="+average);
+        System.out.println("max=============="+max);
+        System.out.println("min=============="+min);
 
-        // System.out.println(a1);
-        // System.out.println(a2);
-
-
+        List<Integer> a1 = list1.stream().sorted((x,y) -> x.getSage() - y.getSage()).map(TestDto::getSage).distinct().collect(Collectors.toList());
+        Integer s = a1.stream().mapToInt(Integer::intValue).sum();
+        Integer m = a1.stream().mapToInt(Integer::intValue).max().getAsInt();
+        Integer in = a1.stream().mapToInt(Integer::intValue).min().getAsInt();
+        Double av = a1.stream().mapToDouble(Integer::intValue).average().getAsDouble();
+        System.out.println(a1);
+        System.out.println(s);
+        System.out.println(m);
+        System.out.println(in);
+        System.out.println(av);
 
     }
-
     @Test
     public void test6(){
         EnumApplyStatus test = EnumApplyStatus.valueOfCode(2);
@@ -377,13 +395,12 @@ public class DemoApplicationTests {
     }
 
     @Test
-    public void test17(){
-        List<Integer> list = new ArrayList<>();
-        System.out.println(list.size());
-
-
+    public void test17() throws InterruptedException {
+            System.out.println("当前的时间：" + System.currentTimeMillis());
+            TimeUnit.MINUTES.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(300);
+            System.out.println("睡眠3秒的时间：" + System.currentTimeMillis());
     }
-
 
 
 }
