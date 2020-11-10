@@ -78,11 +78,13 @@ public class DemoApplicationTests {
 
     @Test
     public void updateTest() {
+        //useAffectedRows=true，返回受影响的行数
+        //useAffectedRows=false，返回找到数据行数
         TestDto testDto = new TestDto();
-        testDto.setSname("爱女");
-        testDto.setSex("女");
+        testDto.setSage(89);
+        testDto.setSno(2);
         int testDtoList = testService.update(testDto);
-        System.out.println(JSON.toJSON(testDtoList));
+        System.out.println(testDtoList);
     }
 
     @Test
