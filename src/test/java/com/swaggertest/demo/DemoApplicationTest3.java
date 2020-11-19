@@ -2,9 +2,11 @@ package com.swaggertest.demo;
 
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
+import com.alibaba.fastjson.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.assertj.core.util.Lists;
@@ -75,6 +77,17 @@ public class DemoApplicationTest3 {
             System.out.println(integer);
         }
 
+    }
+
+    @Test
+    public void test5() throws ParseException {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(1605684789796L);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        //        calendar.set(Calendar.MILLISECOND, 999);
+        System.out.println(calendar.getTimeInMillis());
     }
 
 }

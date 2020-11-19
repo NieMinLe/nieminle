@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -170,11 +171,15 @@ public class DemoApplicationTests {
         list1.add(t3);
         list1.add(t4);
 
-        // Map<Integer,String> testMap = list1.stream().collect(Collectors.toMap(TestDto::getSage, TestDto::getSdept, (k, v) -> k));
-        // System.out.println(testMap);
+        Map<Integer,String> c1 = list1.stream().collect(Collectors.toMap(TestDto::getSage,TestDto::getSdept,(k,v) -> v));
 
-        // Map<Integer,List<TestDto>> testMap1 = list1.stream().collect(Collectors.groupingBy(TestDto::getSage));
-        // System.out.println(testMap1);
+        Map<Integer,TestDto> c2 = list1.stream().collect(Collectors.toMap(TestDto::getSage, Function.identity(),(k,v) -> v));
+
+        Map<Integer,List<TestDto>> c3 = list1.stream().collect(Collectors.groupingBy(TestDto::getSage));
+
+        System.out.println("c1=="+c1);
+        System.out.println("c2=="+c2);
+        System.out.println("c3=="+c3);
 
         Map<Integer, List<TestDto>> listMap = list1.stream().collect(Collectors.groupingBy(TestDto::getSage));
         Map<Integer, String> map = list1.stream().collect(Collectors.toMap(TestDto::getSage, TestDto::getSdept, (k, z) -> z));

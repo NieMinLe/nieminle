@@ -13,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -48,6 +49,24 @@ public class TestController {
         List<TestDto> list = testService.query(index,limit);
         return ApiResult.success(list,testService.queryCount());
     }
+
+    //list分页
+    public List<TestDto> fenye(List<TestDto> list,int pageIndex, int pageSize){
+
+        List<TestDto> currentPageList = new ArrayList<>();
+
+        if (list != null && list.size() > 0) {
+            int currIdx = (pageIndex > 1 ? (pageIndex - 1) * pageSize : 0);
+            for (int i = 0; i < pageSize && i < list.size() - currIdx; i++) {
+                TestDto data = list.get(currIdx + i);
+                currentPageList.add(data);
+            }
+        }
+
+        return currentPageList;
+
+    }
+
 
     @GetMapping("/queryOne")
     @ApiOperation("通过ID查询数据")

@@ -3,11 +3,13 @@ package com.swaggertest.demo;
 import com.alibaba.fastjson.JSONObject;
 import com.swaggertest.demo.domain.dto.First;
 import com.swaggertest.demo.service.CateService;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.jws.soap.SOAPBinding;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
@@ -78,7 +80,9 @@ public class CateTest {
 
         System.out.println("筛选列表: " + filtered);
 
-        String mergedString = strings.stream().filter(v -> StringUtils.isNotBlank(v)).collect(Collectors.joining(","));
+        String te = StringUtils.join(strings,",");
+        System.out.println("简单的没去空："+te);
+        String mergedString = strings.stream().filter(v -> !v.isEmpty()).collect(Collectors.joining(","));
         System.out.println("合并字符串: " + mergedString);
     }
 
