@@ -2,13 +2,17 @@ package com.swaggertest.demo;
 
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.swaggertest.demo.domain.dto.FollowTrafficTrendDTO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,8 +65,8 @@ public class DemoApplicationTest3 {
     @Test
     public void test3() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date time = sdf.parse("2020-11-07 17:10:58");
-        Long interval = cn.hutool.core.date.DateUtil.between(new Date(), time, DateUnit.DAY);//不满x小时算x小时，所以23-x
+        Date time = sdf.parse("2020-11-20 14:13:00");
+        Long interval = cn.hutool.core.date.DateUtil.between(new Date(), time, DateUnit.SECOND);//不满x小时算x小时，所以23-x
         System.out.println(interval);
     }
 
@@ -79,16 +83,83 @@ public class DemoApplicationTest3 {
 
     }
 
+    //补0
     @Test
     public void test5() throws ParseException {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(1605684789796L);
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-        //        calendar.set(Calendar.MILLISECOND, 999);
-        System.out.println(calendar.getTimeInMillis());
+        int days = 7;
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(1605863519438L);
+        List<FollowTrafficTrendDTO> result = new ArrayList<>();
+        FollowTrafficTrendDTO dto;
+        for (int i = 0; i < days; i++) {
+            c.add(Calendar.DAY_OF_MONTH,i>0? 1 : 0);
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH) + 1;
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(year).append("-").append(month<10 ? "0"+month : "" + month)
+                .append("-").append(day<10 ? "0"+day : "" + day);
+            String dayStr = sb.toString();
+            dto = new FollowTrafficTrendDTO();
+            dto.setNum(0);
+            dto.setDay(dayStr);
+            result.add(dto);
+
+        }
+
+        System.out.println(JSONObject.toJSONString(result));
+
+
     }
+
+    //数据
+    @Test
+    public void test6(){
+        for(int i=30000;i<40000;i++){
+            System.out.println("insert into first(sname,sex,sage,sdept) values('A"+ i +"','男',10,'d1"+i+"');");
+        }
+    }
+
+    @Test
+    public void test7(){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("昨天："+ DateUtil.yesterday());
+        System.out.println("今天："+ sdf.format(new Date()));
+        System.out.println("这个是时间："+DateUtil.beginOfDay(DateUtil.yesterday()));
+        System.out.println("这个是时间："+DateUtil.endOfDay(DateUtil.yesterday()));
+
+
+        System.out.println("这个是时间："+DateUtil.beginOfDay(new Date()));
+
+
+        System.out.println("今天的最后一刻："+DateUtil.endOfDay(new Date()));
+        System.out.println("这个月的最后一天："+DateUtil.endOfMonth(new Date()));
+        System.out.println("这个月的最后一天："+DateUtil.endOfMonth(new Date()));
+    }
+
+    @Test
+    public void test8(){
+        String dateFormat = "yyyy-MM-dd";
+        Date today = DateUtil.parse(DateUtil.format(new Date(), dateFormat), dateFormat);
+
+        Date t1 = DateUtil.beginOfDay(new Date());
+        System.out.println(today);
+        System.out.println(t1);
+
+    }
+
+    @Test
+    public void test9(){
+
+        Random random = new Random();
+        for(int i = 0;i<10;i++){
+            System.out.println(random.nextInt(5)+5);
+        }
+
+    }
+
 
 }
 

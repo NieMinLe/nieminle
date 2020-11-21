@@ -171,9 +171,33 @@ public class DemoApplicationTests {
         list1.add(t3);
         list1.add(t4);
 
+        Boolean flag ;
+
+        List<Integer> l1 = list1.stream().map(TestDto::getSage).collect(Collectors.toList());
+        String l2 = StringUtils.join(l1,",");
+        System.out.println("l1================"+l1);
+        System.out.println("l2================"+l2);
+
+        flag = list1.stream().filter(v ->  v.getSage() == 13).findAny().isPresent();
+        System.out.println("findAny=-="+flag);
+        flag = list1.stream().anyMatch(v -> v.getSage() == 13);
+        System.out.println("anyMatch=-="+flag);
+
+        if(list1.stream().anyMatch(v -> v.getSage() == 13)){
+            System.out.println("这里面有个年龄为13的人");
+        }
+
+        if(list1.stream().noneMatch(v -> v.getSage() == 15)){
+            System.out.println("这里面有一个人的年龄不是15");
+        }
+
+        if(list1.stream().findAny().get().getSage() == 15){
+            System.out.println("一个意思");
+        }
+
         Map<Integer,String> c1 = list1.stream().collect(Collectors.toMap(TestDto::getSage,TestDto::getSdept,(k,v) -> v));
 
-        Map<Integer,TestDto> c2 = list1.stream().collect(Collectors.toMap(TestDto::getSage, Function.identity(),(k,v) -> v));
+        Map<Integer,TestDto> c2 = list1.stream().limit(1).collect(Collectors.toMap(TestDto::getSage, Function.identity(),(k,v) -> v));
 
         Map<Integer,List<TestDto>> c3 = list1.stream().collect(Collectors.groupingBy(TestDto::getSage));
 

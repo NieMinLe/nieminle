@@ -7,6 +7,10 @@ public interface TestService {
 
     List<TestDto> query(Integer page,Integer limit);
 
+    List<TestDto> queryAll();
+
+    List<TestDto> queryAllThis();
+
     Integer queryCount();
 
     TestDto queryOne(int id);

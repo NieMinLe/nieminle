@@ -15,6 +15,8 @@ public interface TestMapper extends Mapper<TestDto> {
 
     List<TestDto> queryAll(@Param("page") Integer page,@Param("limit") Integer limit);
 
+    List<TestDto> queryEvery();
+
     Integer queryCount();
 
 }

@@ -1,5 +1,7 @@
 package com.swaggertest.demo.controller;
 
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -13,15 +15,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +39,28 @@ public class TestController {
     @Autowired
     private RedisUtil redisUtil;
 
+    @ApiOperation("多线程查询数据")
+    @GetMapping("/query1")
+    public ApiResult queryMultithreading(){
+        Long zhiqian = System.currentTimeMillis();
+        List<TestDto> testDtos = testService.queryAll();
+        Long zhihou = System.currentTimeMillis();
+        Long miao = (zhihou - zhiqian) / 1000;
+        System.out.println("这里是相差的秒数=-=-=-=-="+miao);
+        return ApiResult.success(testDtos);
+    }
+
+    @ApiOperation("简单的查询所有数据")
+    @GetMapping("/query2")
+    public ApiResult queryAll(){
+        Long zhiqian = System.currentTimeMillis();
+        List<TestDto> testDtos = testService.queryAllThis();
+        Long zhihou = System.currentTimeMillis();
+        Long miao = (zhihou - zhiqian) / 1000;
+        System.out.println("这里是相差的秒数=-=-=-=-="+miao);
+        return ApiResult.success(testDtos);
+    }
+
     @ApiOperation("查询表所有数据")
     @GetMapping("/query")
     public ApiResult query(Integer page,Integer limit){
@@ -49,6 +72,7 @@ public class TestController {
         List<TestDto> list = testService.query(index,limit);
         return ApiResult.success(list,testService.queryCount());
     }
+
 
     //list分页
     public List<TestDto> fenye(List<TestDto> list,int pageIndex, int pageSize){

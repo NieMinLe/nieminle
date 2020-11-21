@@ -6,7 +6,10 @@ import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.exception.IsException;
 import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.system.enums.EnumApplyStatus;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,46 @@ public class TestServiceImpl implements TestService {
     @Override
     public List<TestDto> query(Integer page,Integer limit){
         return testMapper.queryAll(page,limit);
+    }
+
+    @Override
+    public List<TestDto> queryAllThis(){
+        return testMapper.queryEvery();
+    }
+
+    @Override
+    public List<TestDto> queryAll(){
+        Integer listSize  = testMapper.queryCount();
+        Integer runSize  =20;
+
+        // 一个线程处理数据条数，如果库中有100条数据，开启20个线程，那么每一个线程执行的条数就是5条
+        int count = listSize / runSize;
+
+        // 创建一个线程池，数量和开启线程的数量一样
+        ExecutorService executor = Executors.newFixedThreadPool(runSize);
+
+        List<TestDto> listThis = new ArrayList<>();
+
+        for (int i = 0; i < runSize; i++) {
+            int index = i * count;
+            int num = count;
+            //开启线程
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        //查询的结果如何保存下来，会不会存在覆盖的问题
+                        List<TestDto> list = testMapper.queryAll(index , num);
+                        listThis.addAll(list);
+                    } catch (Exception e) {
+                        System.out.println("查询失败" + e);
+                    }
+                }
+            });
+        }
+        //关闭线程
+        executor.shutdown();
+        return listThis;
     }
 
     @Override

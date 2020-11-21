@@ -17,6 +17,10 @@
         select * from first f1 limit #{page},#{limit}
     </select>
 
+    <select id="queryEvery" resultType="com.swaggertest.demo.domain.dto.TestDto">
+        select * from first f1
+    </select>
+
     <select id="queryCount" resultType="java.lang.Integer">
         select count(1) from first f1
     </select>
