@@ -10,9 +10,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -152,11 +155,23 @@ public class DemoApplicationTest3 {
 
     @Test
     public void test9(){
-
         Random random = new Random();
         for(int i = 0;i<10;i++){
             System.out.println(random.nextInt(5)+5);
         }
+    }
+
+    @Test
+    public void test10(){
+        List<String> list = Lists.newArrayList("123asdasd",null,"936475298734502983475029384752093847520934857203485",null,"three");
+        list.removeAll(Collections.singleton(null));
+
+        list.forEach(v ->{
+            if(NumberUtils.isParsable(v)){
+                System.out.println("这个能转数字=-="+v);
+            }
+        });
+
 
     }
 

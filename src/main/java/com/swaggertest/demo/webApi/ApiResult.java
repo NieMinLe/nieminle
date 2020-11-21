@@ -45,11 +45,14 @@ public class ApiResult {
 	        return result;
 	    }
 
-	    public static ApiResult failure(ResultCode resultCode) {
+	    public static ApiResult failure(ResultCode resultCode,String msg,Boolean flag) {
 	    	ApiResult result = new ApiResult();
 	        result.setResultCode(resultCode);
+	        result.setMsg(msg);
 	        return result;
 	    }
+
+
 
 	    public static ApiResult failure(ResultCode resultCode, Object data) {
 	    	ApiResult result = new ApiResult();

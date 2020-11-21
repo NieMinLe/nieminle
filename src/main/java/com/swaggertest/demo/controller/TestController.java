@@ -98,7 +98,9 @@ public class TestController {
         @ApiImplicitParam(name = "id",value = "主键ID",required = true)
     )
     public TestDto queryOne(int id) {
-        return testService.queryOne(id);
+        TestDto testDto = testService.queryOne(id);
+        Integer age = testDto.getSage();
+        return testDto;
     }
 
     @GetMapping("/queryLikeName")
@@ -107,7 +109,9 @@ public class TestController {
         @ApiImplicitParam(name = "name",value = "查询名字",required = true)
     )
     public List<TestDto> queryLikeName(String name) {
-        return testService.queryLikeName(name);
+        List<TestDto> testDtos = testService.queryLikeName(name);
+        TestDto t = testDtos.get(10);
+        return testDtos;
     }
 
     @ApiOperation("插入数据")

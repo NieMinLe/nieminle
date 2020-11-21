@@ -160,7 +160,7 @@ public class DemoApplicationTests {
 
         TestDto t4 = new TestDto();
         t4.setSdept("PHP");
-        t4.setSage(13);
+        t4.setSage(14);
 
         TestDto t3 = new TestDto();
         t3.setSdept("GOODMAN");
@@ -213,6 +213,13 @@ public class DemoApplicationTests {
         Integer sum = list1.stream().mapToInt(TestDto::getSage).sum();
         Double average = list1.stream().mapToDouble(TestDto::getSage).average().getAsDouble();
         Integer max = list1.stream().mapToInt(TestDto::getSage).max().getAsInt();
+
+        //获取年龄最大的对象
+        TestDto dto = list1.stream().max(Comparator.comparing(TestDto::getSage)).get();
+        System.out.println("年龄最大的对象哈哈"+dto);
+
+        list1.sort(Comparator.comparing(TestDto::getSage).reversed());
+
         Integer min = list1.stream().mapToInt(TestDto::getSage).min().getAsInt();
         System.out.println("sum============"+sum);
         System.out.println("average=============="+average);
