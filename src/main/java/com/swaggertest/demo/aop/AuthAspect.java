@@ -19,6 +19,8 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * 权限校验切面.
@@ -68,8 +70,12 @@ public class AuthAspect {
      *
      * @param joinPoint 切点
      */
-    @Before("requestPoint()")
+    @Before("authPoint()")
     public void doBefore(JoinPoint joinPoint) {
+        // System.out.println("我是之前执行的方法!!!");
+        // ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        // RequestContextHolder.setRequestAttributes(attributes, true);
+
         log.info("token = {}  url = {} method = {} ip = {} class_method = {} class_method = {} args = {}",
                 request.getHeader("token"), request.getRequestURI(), request.getMethod(), request.getRemoteAddr(),
                 joinPoint.getSignature(), joinPoint.getArgs());
@@ -102,7 +108,6 @@ public class AuthAspect {
         if (po.getSno() != methodAuth.level()) {
             throw new MyException(EnumDataOpenCode.NO_PERMISSION.getCode(),"权限不够");
         }
-
         return joinPoint.proceed();
     }
 

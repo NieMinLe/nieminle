@@ -5,6 +5,8 @@ import javax.annotation.PostConstruct;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Component
 @Data
