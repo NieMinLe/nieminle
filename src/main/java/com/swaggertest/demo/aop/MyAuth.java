@@ -11,6 +11,5 @@ import java.lang.annotation.Target;
 @Documented
 public @interface MyAuth {
     boolean value() default true;
-
-    int level() default 0;
+    String name() default "";//备注信息
 }
