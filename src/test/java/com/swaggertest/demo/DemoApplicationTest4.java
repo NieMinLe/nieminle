@@ -27,11 +27,6 @@ public class DemoApplicationTest4 {
         System.out.println(flag);
     }
 
-    @Test
-    public void test3(){
-        //测试代码回退
-    }
-
 }
 
 
