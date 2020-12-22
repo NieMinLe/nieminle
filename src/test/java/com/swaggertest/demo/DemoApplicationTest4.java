@@ -27,6 +27,11 @@ public class DemoApplicationTest4 {
         System.out.println(flag);
     }
 
+    @Test
+    public void test3(){
+        //这里没问题
+    }
+
 }
 
 
