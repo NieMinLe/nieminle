@@ -32,6 +32,11 @@ public class DemoApplicationTest4 {
         //这里没问题
     }
 
+    @Test
+    public void test4(){
+        //没问题4了啊
+    }
+
 }
 
 
