@@ -10,17 +10,14 @@ import com.swaggertest.demo.domain.po.UserPo;
 import com.swaggertest.demo.service.TestService;
 import com.swaggertest.demo.system.enums.EnumApplyStatus;
 import com.swaggertest.demo.utils.DateUtils;
-import io.swagger.models.auth.In;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -383,14 +380,17 @@ public class DemoApplicationTests {
 
     @Test
     public void test13(){
-        List<String> sa = Arrays.asList("a","b","c","d","",null);
+        List<String> sa = Lists.newArrayList("a","b","c","d","",null);
         //list去空
         List sa1 =  sa.stream().filter(StringUtils::isNotEmpty).collect(Collectors.toList());
         List sa2 = sa.stream().filter(StringUtils::isNotBlank).collect(Collectors.toList());
 
+        String te = StringUtils.join(sa.stream().filter(StringUtils::isNotBlank).collect(Collectors.toList()), ",");
+
         System.out.println(sa);
         System.out.println(sa1);
         System.out.println(sa2);
+        System.out.println(te);
 
     }
 

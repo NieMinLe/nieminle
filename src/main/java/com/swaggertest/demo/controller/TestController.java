@@ -1,7 +1,5 @@
 package com.swaggertest.demo.controller;
 
-import cn.hutool.core.date.DateUnit;
-import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -15,9 +13,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,10 +64,10 @@ public class TestController {
     public ApiResult query(Integer page,Integer limit){
         // redisUtil.setCache("three","you is women");
         // redisUtil.setCacheExpireTime("three","you is wo",2L, TimeUnit.HOURS);
-        // redisUtil.del("first");
-        // redisUtil.del("three");
         Integer index = (page - 1) * limit;
         List<TestDto> list = testService.query(index,limit);
+        List<Integer> sno = list.stream().map(TestDto::getSno).collect(Collectors.toList());
+        // redisUtil.setRedisBitMap(sno);
         return ApiResult.success(list,testService.queryCount());
     }
 
@@ -95,11 +93,10 @@ public class TestController {
     @GetMapping("/queryOne")
     @ApiOperation("通过ID查询数据")
     @ApiImplicitParams(
-        @ApiImplicitParam(name = "id",value = "主键ID",required = true)
+        @ApiImplicitParam(name = "id",value = "主键ID")
     )
     public TestDto queryOne(int id) {
         TestDto testDto = testService.queryOne(id);
-        Integer age = testDto.getSage();
         return testDto;
     }
 

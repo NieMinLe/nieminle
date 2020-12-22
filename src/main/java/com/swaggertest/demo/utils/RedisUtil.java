@@ -1,6 +1,7 @@
 package com.swaggertest.demo.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.swaggertest.demo.domain.dto.RedisDTO;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +15,19 @@ public class RedisUtil {
   @Autowired
   private RedisTemplate redisTemplate;
 
+  private static final String activeName = "activeUser:";
 
+  public void setRedisBitMap() {
+    del(activeName);
+    List<Long> te = Lists.newArrayList(1L,2L,3L,4L,5L,6L,7L,8L,9L,10L);
+    te.forEach(v ->{
+      redisTemplate.opsForValue().setBit(activeName,v,true);
+    });
+  }
+
+  public Boolean getRedisBitMap(Long id) {
+    return redisTemplate.opsForValue().getBit(activeName,id);
+  }
 
   public void setCache(String key,Object data) {
     redisTemplate.opsForValue().set(key, JSON.toJSONString(data));

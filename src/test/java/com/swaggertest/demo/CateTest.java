@@ -1,11 +1,14 @@
 package com.swaggertest.demo;
 
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.swaggertest.demo.domain.dto.First;
+import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.service.CateService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,10 +70,11 @@ public class CateTest {
 
     @Test
     public void test2(){
-        List<Long> list1 = Lists.newArrayList(11L,22L,33L);
-        List<Long> list2 = Lists.newArrayList(11L,30L,40L);
-        list1.retainAll(list2);
-        System.out.print(list1);
+        List<Long> list1 = Lists.newArrayList(1L,2L,3L);
+        List<Long> list2 = Lists.newArrayList(3L,3L,4L);
+        System.out.println(list2);
+        list2.retainAll(list1);
+        System.out.print(list2);
     }
 
     @Test
@@ -111,7 +115,10 @@ public class CateTest {
 
     @Test
     public void test5(){
+        List<TestDto> course = JSONObject.parseArray("[{'Sno':'19111','Sname':'楚门测试9录播','Sex':'女'}]", TestDto.class);
+        System.out.println(JSONObject.toJSONString(course));
     }
+
 }
 
 

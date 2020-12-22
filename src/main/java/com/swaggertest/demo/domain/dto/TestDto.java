@@ -3,19 +3,25 @@ package com.swaggertest.demo.domain.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Table(name = "first")
 @ApiModel(value = "查询所有DTO")
 public class TestDto implements Serializable {
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(name = "Sno",value = "编号", dataType = "Integer")
+    @NotNull(message = "主键ID不能为空!")
     private Integer Sno;
 
     @ApiModelProperty(name = "Sname",value = "姓名（长度10）", dataType = "String")
@@ -29,5 +35,7 @@ public class TestDto implements Serializable {
 
     @ApiModelProperty(name = "Sdept",value = "部门（长度4）", dataType = "String")
     private String  Sdept;
+
+    private List<Long> test;
 
 }
