@@ -1,6 +1,9 @@
 package com.swaggertest.demo;
 
+import com.google.common.base.Preconditions;
 import com.swaggertest.demo.utils.RedisUtil;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +32,9 @@ public class DemoApplicationTest4 {
 
     @Test
     public void test3(){
-        //这里没问题
-    }
-
-    @Test
-    public void test5(){
-        System.out.println("回退代码");
+        List<String> te = new ArrayList<>();
+        Preconditions.checkArgument(!te.isEmpty(),"不能为空");
+        System.out.println("不能为空啊");
     }
 
 }
