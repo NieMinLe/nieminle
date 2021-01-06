@@ -1,12 +1,6 @@
 package com.swaggertest.demo;
 
-import com.google.common.base.Preconditions;
-import com.swaggertest.demo.system.enums.EnumApplyStatus;
 import com.swaggertest.demo.utils.RedisUtil;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +29,7 @@ public class DemoApplicationTest4 {
 
     @Test
     public void test3(){
-        List<String> te = new ArrayList<>();
-        Preconditions.checkArgument(!te.isEmpty(),"不能为空");
-        System.out.println("不能为空啊");
-    }
-
-    @Test
-    public void test4(){
-        Boolean flag = EnumApplyStatus.isRefund((byte)9);
-        if(flag) {
-            System.out.println("确实能找到");
-        }
-
+        //这里没问题
     }
 
     @Test
