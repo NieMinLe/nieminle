@@ -27,6 +27,15 @@ public enum EnumApplyStatus {
     RESCINDED(9, "已撤销"),
 
     ;
+
+    public static boolean isRefund(Byte code) {
+        if (code == null) {
+            return Boolean.FALSE;
+        } else {
+            return RESCINDED.getStatus().byteValue() == code ? Boolean.TRUE : Boolean.FALSE;
+        }
+    }
+
     /**
      * 状态码
      */
