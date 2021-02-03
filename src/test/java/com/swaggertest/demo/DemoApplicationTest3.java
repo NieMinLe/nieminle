@@ -54,16 +54,18 @@ public class DemoApplicationTest3 {
 
     @Test
     public void test2() {
-        List<String> attach = Lists.newArrayList("https://res.shiguangkey.com/taoli/2020/11/8/e763bc6205/16048164600675791.jpeg,asdasdqweqwtrqwqwdwqwd");
+        List<String> attach = Lists
+            .newArrayList(
+                "https://res.shiguangkey.com/taoli/2020/11/8/e763bc6205/16048164600675791.jpeg,asdasdqweqwtrqwqwdwqwd");
         String attachStr = "asdasd,xcvbxcgfh,36dfgdfgh";
         List<String> f = Arrays.asList(attachStr.split(","));
         System.out.println(f);
 
-        // if (attach != null) {
-        //     for (String url : attach) {
-        //         attachStr += url + ",";
-        //     }
-        // }
+        if (attach != null) {
+            for (String url : attach) {
+                attachStr += url + ",";
+            }
+        }
         // System.out.println(attachStr);
     }
 

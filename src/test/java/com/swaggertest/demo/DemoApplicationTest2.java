@@ -8,9 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
@@ -82,7 +80,6 @@ public class DemoApplicationTest2 {
         collect1.add(t1);
         collect1.add(t2);
         collect1.add(t3);
-
         System.out.println(collect1);
         collect1.forEach(v -> {
             if (v.getSage() == null) {
@@ -93,11 +90,6 @@ public class DemoApplicationTest2 {
         System.out.println(collect1);
         List<TestDto> collect = collect1.stream().sorted(Comparator.comparingInt(TestDto::getSage).reversed())
             .collect(Collectors.toList());
-
-        Set<TestDto> set = new HashSet<>();
-        set.addAll(collect);
-
-        if(set.contains(123))
 
         System.out.println(collect);
 
