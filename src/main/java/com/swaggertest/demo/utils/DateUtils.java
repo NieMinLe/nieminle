@@ -149,5 +149,4 @@ public class DateUtils {
         Date newTime = calendar.getTime();
         return newTime;
     }
-
 }
