@@ -20,9 +20,4 @@ public class RedisTest {
         }
     }
 
-    @Test
-    public void test2(){
-        System.out.println("组队冲杀");
-    }
-
 }
