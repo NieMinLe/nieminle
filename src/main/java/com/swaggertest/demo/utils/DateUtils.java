@@ -133,4 +133,21 @@ public class DateUtils {
         }
         return defaultValue;
     }
+
+    /**
+     * @param time 时间
+     * @param num  加的数，-num就是减去
+     * @return 减去相应的数量的秒的时间
+     */
+    public static Date secondAddNum(Date time, Integer num) {
+        //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //Date date = format.parse(time);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(time);
+        calendar.add(Calendar.SECOND, num);
+        Date newTime = calendar.getTime();
+        return newTime;
+    }
+
 }
