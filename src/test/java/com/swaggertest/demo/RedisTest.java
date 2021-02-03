@@ -19,5 +19,4 @@ public class RedisTest {
             redisTemplate.expireAt("123123123", DateUtils.secondAddNum(new Date(), 10));
         }
     }
-
 }
