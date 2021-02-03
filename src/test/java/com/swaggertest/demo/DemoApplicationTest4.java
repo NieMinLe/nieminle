@@ -7,11 +7,14 @@ import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.utils.RedisUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,6 +128,22 @@ public class DemoApplicationTest4 {
         System.out.println(consultMoney);
 
     }
+
+    @Test
+    public void test9(){
+
+        List<Integer> list = Lists.newArrayList(1,2,3,4,5,6,7,7,8,9,null);
+        System.out.println(list);
+        list.removeAll(Collections.singleton(null));
+        System.out.println(list);
+
+        String str = StringUtils.join(list,",");
+        System.out.println(str);
+
+
+
+    }
+
 
 
 }
