@@ -139,10 +139,20 @@ public class DemoApplicationTest4 {
 
         String str = StringUtils.join(list,",");
         System.out.println(str);
+    }
 
+    @Test
+    public void test10(){
+        String str = "";
+        String str1 = null;
+        String str2 = "      ";
 
+        System.out.println(StringUtils.isBlank(str));
+        System.out.println(StringUtils.isBlank(str1));
+        System.out.println(StringUtils.isBlank(str2));
 
     }
+
 
 
 

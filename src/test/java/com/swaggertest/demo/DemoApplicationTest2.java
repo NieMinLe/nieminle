@@ -6,10 +6,9 @@ import com.swaggertest.demo.utils.MyUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.assertj.core.util.Lists;
@@ -70,6 +69,7 @@ public class DemoApplicationTest2 {
         List<TestDto> collect1 = new ArrayList<>();
         TestDto t1 = new TestDto();
         t1.setSname("我是1");
+        t1.setSage(1);
 
         TestDto t2 = new TestDto();
         t2.setSname("我是2");
@@ -79,28 +79,30 @@ public class DemoApplicationTest2 {
         t3.setSname("我是3");
         t3.setSage(2);
 
+        TestDto t4 = new TestDto();
+        t3.setSname("我是4");
+
+        TestDto t5 = new TestDto();
+        t3.setSname("我是5");
+
         collect1.add(t1);
         collect1.add(t2);
         collect1.add(t3);
+        collect1.add(t4);
+        collect1.add(t5);
 
         System.out.println(collect1);
-        collect1.forEach(v -> {
-            if (v.getSage() == null) {
-                v.setSage(0);
-            }
-        });
+        List<Integer> integers = collect1.stream().map(TestDto::getSage).collect(Collectors.toList());
+        Set<Integer> set = collect1.stream().map(TestDto::getSage).collect(Collectors.toSet());
 
-        System.out.println(collect1);
-        List<TestDto> collect = collect1.stream().sorted(Comparator.comparingInt(TestDto::getSage).reversed())
-            .collect(Collectors.toList());
+        System.out.println("integers=-=-=-="+integers);
+        System.out.println("set=-=-=-=-="+set);
 
-        Set<TestDto> set = new HashSet<>();
-        set.addAll(collect);
+        integers.removeIf(Objects::isNull);
+        set.removeIf(Objects::isNull);
 
-        if(set.contains(123))
-
-        System.out.println(collect);
-
+        System.out.println("integers去空后=-=-=-="+integers);
+        System.out.println("set去空后=-=-=-=-="+set);
 
     }
 
