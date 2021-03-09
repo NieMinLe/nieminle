@@ -153,6 +153,60 @@ public class DemoApplicationTest4 {
 
     }
 
+    @Test
+    public void test11(){
+        //课程ID
+        List<Long> courseIdsLong = new ArrayList<>();
+        courseIdsLong.add(null);
+        List<Integer> courseIds = courseIdsLong.stream().map(Long::intValue).collect(Collectors.toList());
+
+        System.out.println(courseIds);
+    }
+
+    @Test
+    public void test12(){
+        //课程ID
+        List<Integer> courseIdsLong = new ArrayList<>();
+
+        courseIdsLong.add(1);
+        courseIdsLong.add(2);
+        courseIdsLong.add(4);
+        courseIdsLong.add(3);
+        courseIdsLong.add(6);
+        courseIdsLong.add(5);
+        courseIdsLong.add(7);
+        courseIdsLong.add(8);
+
+        System.out.println(courseIdsLong);
+        List<Integer> test = courseIdsLong.stream().sorted().collect(Collectors.toList());
+        System.out.println(test);
+
+        test.forEach(v ->{
+            if(v == 6){
+                System.out.println(courseIdsLong.indexOf(v));
+            }
+        });
+    }
+
+    @Test
+    public void test13(){
+        JSONArray test = new JSONArray();
+
+        JSONObject te = new JSONObject();
+        te.put("谭","傻🐕");
+        te.put("你","吃饭了吗");
+
+        JSONObject te2 = new JSONObject();
+        te2.put("是","没吃饭我给你");
+        te2.put("？","拉一点");
+
+        test.add(te);
+        test.add(te2);
+        System.out.println(te);
+        System.out.println(te2);
+        System.out.println(test);
+    }
+
 
 
 
