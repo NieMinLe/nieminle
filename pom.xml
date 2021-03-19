@@ -138,6 +138,19 @@
             <version>3.1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tz.vip.course</groupId>
+            <artifactId>vip-edu-power-stub</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

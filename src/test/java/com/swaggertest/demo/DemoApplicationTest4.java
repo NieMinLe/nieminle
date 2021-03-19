@@ -8,6 +8,7 @@ import com.swaggertest.demo.utils.RedisUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,12 +83,14 @@ public class DemoApplicationTest4 {
         list1.add(t3);
         list1.add(t4);
 
-        List<Integer> te = list1.stream().map(TestDto::getSage).collect(Collectors.toList());
-        Set<Integer> te2 = list1.stream().map(TestDto::getSage).collect(Collectors.toSet());
+        List<Integer> te = list1.stream().sorted(Comparator.comparing(TestDto::getSage).reversed()).map(TestDto::getSage).collect(Collectors.toList());
+        Set<Integer> te2 = list1.stream().sorted(Comparator.comparing(TestDto::getSage).reversed()).map(TestDto::getSage).collect(Collectors.toSet());
+
+        List<Long> listInteger = list1.stream().map(v -> v.getSage().longValue()).collect(Collectors.toList());
 
         System.out.println(te);
         System.out.println(te2);
-
+        System.out.println("listInteger=-=-="+listInteger);
 
     }
 
@@ -177,9 +180,12 @@ public class DemoApplicationTest4 {
         courseIdsLong.add(7);
         courseIdsLong.add(8);
 
-        System.out.println(courseIdsLong);
-        List<Integer> test = courseIdsLong.stream().sorted().collect(Collectors.toList());
-        System.out.println(test);
+        System.out.println("1=-=-=-="+courseIdsLong);
+        List<Integer> test = courseIdsLong.stream().sorted(Comparator.comparing(Integer::intValue)).collect(Collectors.toList());
+        System.out.println("2=-=-=-="+test);
+        List<Integer> test1 = courseIdsLong.stream().sorted().collect(Collectors.toList());
+        System.out.println("3=-=-=-="+test1);
+
 
         test.forEach(v ->{
             if(v == 6){
