@@ -28,13 +28,18 @@ public class CateController {
     @Autowired
     private Test test;
 
+    /**
+     * @author 聂闽乐
+     * @Description 三级下拉接口
+     * @Date 2020-06-15 21:46
+     */
     @ApiOperation("查询科目的三级下拉")
     @GetMapping("/threeLevelPullDown")
     @MyAuth(name = "好")
     public ApiResult threeLevelPullDown(){
         List<CateDTO> list = cateService.threeLevelPullDown();
 
-        test.test();
+        // test.test();
         return ApiResult.success(list);
     }
 

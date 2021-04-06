@@ -7,6 +7,7 @@ import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.utils.RedisUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -87,6 +88,7 @@ public class DemoApplicationTest4 {
         Set<Integer> te2 = list1.stream().sorted(Comparator.comparing(TestDto::getSage).reversed()).map(TestDto::getSage).collect(Collectors.toSet());
 
         List<Long> listInteger = list1.stream().map(v -> v.getSage().longValue()).collect(Collectors.toList());
+
 
         System.out.println(te);
         System.out.println(te2);
@@ -213,6 +215,35 @@ public class DemoApplicationTest4 {
         System.out.println(test);
     }
 
+    @Test
+    public void test14(){
+        String deptIdChain = "1001-6822";
+        String dept = "1001";
+        // String split = deptIdChain.split("-")[1];
+        // System.out.println(split);
+
+        String overseasDeptId = "";
+        if (!dept.equals(deptIdChain)) {
+            String[] split = deptIdChain.split("-");
+            dept = split[split.length - 2];
+            overseasDeptId = deptIdChain.split("-")[1];
+        }
+        System.out.println(overseasDeptId);
+
+    }
+
+    @Test
+
+    public void test15(){
+        List<Long> courseIdsLong = new ArrayList<>();
+        courseIdsLong.add(123L);
+        courseIdsLong.add(null);
+
+        List<Integer> courseIds = courseIdsLong.stream().filter(v -> v != null).map(Long::intValue).collect(Collectors.toList());
+
+        System.out.println(courseIds);
+
+    }
 
 
 
