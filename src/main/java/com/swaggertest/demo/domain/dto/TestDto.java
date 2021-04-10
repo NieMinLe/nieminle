@@ -3,6 +3,7 @@ package com.swaggertest.demo.domain.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,6 +36,8 @@ public class TestDto implements Serializable {
 
     @ApiModelProperty(name = "Sdept",value = "部门（长度4）", dataType = "String")
     private String  Sdept;
+
+    private BigDecimal price;
 
     private List<Long> test;
 
