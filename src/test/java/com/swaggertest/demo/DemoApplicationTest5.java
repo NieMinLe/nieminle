@@ -120,6 +120,11 @@ public class DemoApplicationTest5 {
         System.out.println("当前的时间"+new Date(System.currentTimeMillis()+1000));
     }
 
+    @Test
+    public void test10() {
+        System.out.println("当前的时间"+new Date());
+        System.out.println("当前的时间"+new Date(System.currentTimeMillis()+1000));
+    }
 
 }
 
