@@ -41,8 +41,8 @@ public class AppTestDelete {
 
         // 和本地bean一样使用xxxService
         ListenAccessFacadeAPI permissionFacadeAPI = reference.get(); // 注意：此代理对象内部封装了所有通讯细节，对象较重，请缓存复用
-        ListResultSet<ListenCourseAccessDTO> resultSet = permissionFacadeAPI.getInfoByUserIdAndCourseId(19367114L,10520L);
-        System.out.println("关键字=-=-=-=-=-="+ JSONObject.toJSONString(resultSet));
+        // ListResultSet<ListenCourseAccessDTO> resultSet = permissionFacadeAPI.getCourseIdAndStatusByUserId(19367114L,10520L);
+        // System.out.println("关键字=-=-=-=-=-="+ JSONObject.toJSONString(resultSet));
         //        ListResultSet<CourseApplyDTO> resultSet = permissionFacadeAPI.qryCourseApplyPoByCourseIds(Arrays.asList(100L));
         //        System.out.println("qryCourseApplyPoByCourseIds ============== " + JSON.toJSONString(resultSet));
 

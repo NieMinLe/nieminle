@@ -169,6 +169,18 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.tanzk</groupId>
+            <artifactId>organization-stub</artifactId>
+            <version>1.0.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.coobird.thumbnailator</groupId>
+                    <artifactId>thumbnailator</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <build>
