@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,5 +41,10 @@ public class TestDto implements Serializable {
     private BigDecimal price;
 
     private List<Long> test;
+
+    private Date startDate; //章节开始时间
+
+    private Date endDate; //章节结束时间
+
 
 }

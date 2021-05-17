@@ -70,9 +70,13 @@ public class DemoApplicationTest3 {
     @Test
     public void test3() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date time = sdf.parse("2020-11-20 14:13:00");
-        Long interval = cn.hutool.core.date.DateUtil.between(new Date(), time, DateUnit.SECOND);//不满x小时算x小时，所以23-x
-        System.out.println(interval);
+        List<Date> test = new ArrayList<>();
+        Date time = sdf.parse("2021-04-23 19:59:00"); //章节结束时间
+        Date time1 = sdf.parse("2021-04-23 22:54:00"); //章节结束时间
+        test.add(time);
+        test.add(time1);
+        // Long interval = cn.hutool.core.date.DateUtil.between(new Date(), time, DateUnit.SECOND);//不满x小时算x小时，所以23-x
+        // System.out.println(interval);
     }
 
     @Test

@@ -69,8 +69,8 @@ public class DemoApplicationTest2 {
         List<TestDto> collect1 = new ArrayList<>();
         TestDto t1 = new TestDto();
         t1.setSname("我是1");
-        t1.setSage(1);
 
+        t1.setSage(1);
         TestDto t2 = new TestDto();
         t2.setSname("我是2");
         t2.setSage(1);
