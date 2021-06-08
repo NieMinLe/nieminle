@@ -32,6 +32,7 @@ public class CateTest {
 
     @Test
     public void queryTest1() {
+        //本人测试提交代码
         System.out.println(JSONObject.toJSONString(cateService.threeLevelPullDown()));
         //List<DepartmentTreeDTO> digui(List<DepartmentTreeDTO> list ){
         //         List<DepartmentTreeDTO> returnList = new ArrayList<>();
