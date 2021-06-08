@@ -1,5 +1,5 @@
 server:
-  port: 8011
+  port: 8012
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -25,7 +25,7 @@ spring:
     pub-sub-domain: false # false = Queue true = Topic
 
 # 自己定义的队列名称
-myqueue: boot-activemq-queue
+#myqueue: boot-activemq-queue
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml

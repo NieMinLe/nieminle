@@ -20,19 +20,19 @@ public class ProviderController {
     /**
      * 获取配置文件中的队列名称
      */
-    @Value("${myqueue}")
-    private String myqueue;
+//    @Value("${myqueue}")
+//    private String myqueue;
 
     /**
      * 注入springboot封装的工具类
      */
-    @Resource
-    private JmsMessagingTemplate jmsTemplate;
+//    @Resource
+//    private JmsMessagingTemplate jmsTemplate;
 
-    @PostMapping("send")
-    @ApiOperation("提供者给出的名字")
-    public void send(String name) {
-        jmsTemplate.convertAndSend(myqueue, name);
-    }
+//    @PostMapping("send")
+//    @ApiOperation("提供者给出的名字")
+//    public void send(String name) {
+//        jmsTemplate.convertAndSend(myqueue, name);
+//    }
 
 }

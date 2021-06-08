@@ -39,6 +39,11 @@ public class CustomException {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public ApiResult indexOutException(Exception e, HttpServletRequest request) {
+        Map<String,Object> map = new HashMap();
+        map.put("code",ResultCode.SYSTEM_INNER_ERROR);
+        map.put("msg","这个是下标越界");
+        map.put("下标越界的地方",request.getRequestURI());
+        map.put("具体的位置是这里",e);
         return ApiResult.failure(ResultCode.SYSTEM_INNER_ERROR,"这个是下标越界哦",Boolean.FALSE);
     }
 

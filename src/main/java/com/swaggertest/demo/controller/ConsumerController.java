@@ -14,9 +14,9 @@ public class ConsumerController {
      * @param message
      * @return
      */
-    @JmsListener(destination = "${myqueue}")
-    public void handleMessage(String message) {
-        System.out.println("成功接受name: " + message);
-    }
+//    @JmsListener(destination = "${myqueue}")
+//    public void handleMessage(String message) {
+//        System.out.println("成功接受name: " + message);
+//    }
 
 }

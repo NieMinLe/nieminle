@@ -1,6 +1,7 @@
 package com.swaggertest.demo.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.swaggertest.demo.domain.dto.TestDto;
@@ -16,6 +17,8 @@ import io.swagger.annotations.ApiOperation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
+@Slf4j
 @Api(value = "testController", tags = "简单测试")
 public class TestController {
 
@@ -62,6 +66,7 @@ public class TestController {
     @ApiOperation("查询表所有数据")
     @GetMapping("/query")
     public ApiResult query(Integer page,Integer limit){
+        log.info("打印入参的值=-=page={},limit={}", page,limit);
         // redisUtil.setCache("three","you is women");
         // redisUtil.setCacheExpireTime("three","you is wo",2L, TimeUnit.HOURS);
         Integer index = (page - 1) * limit;
