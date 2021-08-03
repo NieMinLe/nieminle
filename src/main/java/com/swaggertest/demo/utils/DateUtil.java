@@ -2,6 +2,7 @@ package com.swaggertest.demo.utils;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * @Author LIZEJIN
@@ -98,6 +99,10 @@ public class DateUtil {
 
     }
 
+    public static Long dateDiff(Date date1, Date date2) {
+        TimeZone currentTimeZone = TimeZone.getDefault();
+        return (date2.getTime() + (long)currentTimeZone.getRawOffset()) / 86400000L - (date1.getTime() + (long)currentTimeZone.getRawOffset()) / 86400000L;
+    }
 
 }
 

@@ -2,16 +2,17 @@ package com.swaggertest.demo;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.swaggertest.demo.domain.dto.TestDto;
+import com.swaggertest.demo.utils.DateUtil;
 import com.swaggertest.demo.utils.RedisUtil;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
@@ -153,8 +154,103 @@ public class DemoApplicationTest4 {
 
     }
 
+    @Test
+    public void test11() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date test = sdf.parse("2021-06-11");
+        System.out.println(test);
+        System.out.println(new Date());
+        Long day = DateUtil.dateDiff(new Date(),test );
+        System.out.println("日期相对比"+day);
+        if( day < 0L){
+            System.out.printf("确实如此");
+        }else{
+            System.out.println("绝非如此");
+        }
+    }
+
+    @Test
+    public void test12(){
+        Long test = 1L;
+        Long test2 = test + 1;
+        Long test3 = test + 1L;
+        System.out.println(test);
+        System.out.println(test2);
+        System.out.println(test3);
+    }
+
+    @Test
+    public void test13(){
+
+        String test = null;
+        for(int i=0;i<=10;i++){
+            System.out.println(i);
+            test = "这是测试数据";
+        }
+
+        System.out.println(test);
+
+    }
+
+    @Test
+    public void test14(){
+        String test = "1231";
+        Integer t = Integer.valueOf(test);
+    }
+
+    @Test
+    public void test15(){
+        List<TestDto> list = new ArrayList<>();
+
+        TestDto testDto1 = new TestDto();
+        testDto1.setSno(1);
+        testDto1.setSage(13);
+        testDto1.setSname("我是13");
+
+        TestDto testDto2 = new TestDto();
+        testDto2.setSno(2);
+        testDto2.setSage(13);
+        testDto2.setSname("我是13");
+
+        TestDto testDto4 = new TestDto();
+        testDto2.setSno(4);
+        testDto4.setSage(13);
+        testDto4.setSname("我是13");
+
+        TestDto testDto3 = new TestDto();
+        testDto3.setSno(3);
+        testDto3.setSage(14);
+        testDto3.setSname("我是14");
+
+        list.add(testDto1);
+        list.add(testDto2);
+        list.add(testDto3);
+        list.add(testDto4);
+
+//        List<TestDto> list1 = list.stream().filter(distinctByKey1(s -> s.getAge()))
+//                .forEach(System.out::println);
 
 
+        Map<Integer,String> map = list.stream().collect(Collectors.toMap(TestDto::getSage,TestDto::getSname,(k,v) -> v));
+
+        for (Map.Entry<Integer, String> entry : map.entrySet()) {
+            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+        }
+
+        list.stream().collect(Collectors.groupingBy(TestDto::getSage));
+        List<TestDto> distinctClass = list.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getSage() + ";" + o.getSname()))), ArrayList::new));
+
+        System.out.println(list);
+        System.out.println(distinctClass);
+//        System.out.println(map);
+
+    }
+
+    // 次方法来源于：https://blog.csdn.net/haiyoung/article/details/80934467
+    static <T> Predicate<T> distinctByKey1(Function<? super T, ?> keyExtractor) {
+        Map<Object, Boolean> seen = new ConcurrentHashMap<>();
+        return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
 
 }
 

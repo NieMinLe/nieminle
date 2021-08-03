@@ -34,7 +34,7 @@ public class CateController {
     public ApiResult threeLevelPullDown(){
         List<CateDTO> list = cateService.threeLevelPullDown();
 
-        test.test();
+//        test.test();
         return ApiResult.success(list);
     }
 
