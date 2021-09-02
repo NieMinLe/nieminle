@@ -62,7 +62,7 @@ public class DemoApplicationTests5 {
 
     @Test
     public void test5(){
-
+        System.out.println("怎么去掉测试");
 
     }
 
