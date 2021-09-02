@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -132,14 +133,19 @@ public class DemoApplicationTest4 {
 
     @Test
     public void test9(){
-
-        List<Integer> list = Lists.newArrayList(1,2,3,4,5,6,7,7,8,9,null);
+        List<Integer> list = Lists.newArrayList(1,2,3);
         System.out.println(list);
-        list.removeAll(Collections.singleton(null));
+//        list.removeAll(Collections.singleton(null));
+        List<Integer> list2= Lists.newArrayList(1,2,3);
+        System.out.println(list2);
+//        list.removeAll(list2);
         System.out.println(list);
 
-        String str = StringUtils.join(list,",");
-        System.out.println(str);
+        list2.removeAll(list);
+        System.out.println(list2);
+if(CollectionUtils.isEmpty(list2)){
+    System.out.println("这里边是空的");
+}
     }
 
     @Test
@@ -226,10 +232,8 @@ public class DemoApplicationTest4 {
         list.add(testDto2);
         list.add(testDto3);
         list.add(testDto4);
-
-//        List<TestDto> list1 = list.stream().filter(distinctByKey1(s -> s.getAge()))
-//                .forEach(System.out::println);
-
+        String test = list.stream().map(TestDto::getSname).collect(Collectors.joining());
+        System.out.println("这里是拼接的"+test);
 
         Map<Integer,String> map = list.stream().collect(Collectors.toMap(TestDto::getSage,TestDto::getSname,(k,v) -> v));
 
