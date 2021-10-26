@@ -34,7 +34,7 @@ public class MD5Util {
 
     public static void main(String[] args) {
         String password = "nieminle";
-        String md5HexStr = md5(password);//测试
+        String md5HexStr = md5(password);//测试我再提交一遍
         System.out.println("==> MD5 加密前: " + password);
         System.out.println("==> MD5 加密后: " + md5HexStr);
         System.out.println("==> MD5 解密后: " + convertMD5(convertMD5(password)));
