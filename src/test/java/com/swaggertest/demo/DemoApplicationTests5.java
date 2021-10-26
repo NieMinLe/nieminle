@@ -9,10 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = DemoApplication.class)
@@ -55,17 +52,12 @@ public class DemoApplicationTests5 {
 
     @Test
     public void test4(){
-        Integer test = 32;
-
-        Preconditions.checkArgument(test != 1 && test != 2,"输出");
-    }
-
-    @Test
-    public void test5(){
-
+        String test = "2";
+        if(Objects.isNull(test) || (!test.equals("3") && !test.equals("4"))){
+            System.out.println("不是品类3和4");
+        }
 
     }
-
 
 }
 
