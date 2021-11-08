@@ -33,8 +33,7 @@ public class CateController {
     @MyAuth(name = "好")
     public ApiResult threeLevelPullDown(){
         List<CateDTO> list = cateService.threeLevelPullDown();
-
-        test.test();
+//        test.test();
         return ApiResult.success(list);
     }
 

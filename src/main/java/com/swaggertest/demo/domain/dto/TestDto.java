@@ -1,5 +1,6 @@
 package com.swaggertest.demo.domain.dto;
 
+import com.sun.deploy.panel.TreeBuilder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -15,9 +16,6 @@ import lombok.Data;
 @Table(name = "first")
 @ApiModel(value = "查询所有DTO")
 public class TestDto implements Serializable {
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(name = "Sno",value = "编号", dataType = "Integer")

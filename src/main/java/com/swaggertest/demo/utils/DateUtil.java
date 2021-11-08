@@ -1,5 +1,6 @@
 package com.swaggertest.demo.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,6 +11,36 @@ import java.util.Date;
  * @Version V1.0.0
  */
 public class DateUtil {
+
+    /**
+     * 获取当前年份的最后一天
+     * @param year
+     * @return
+     */
+    public static String getYearLast(int year){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//格式化规则
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(Calendar.YEAR, year);
+        calendar.roll(Calendar.DAY_OF_YEAR, -1);
+        Date currYearLast = calendar.getTime();
+
+        return sdf.format(currYearLast);
+    }
+
+    /**
+     * 获取当前时间的年份
+     * @param date
+     * @param year 需要加多少年
+     * @return
+     */
+    public static int getYear(Date date,int year){
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.YEAR,year);
+        return c.get(Calendar.YEAR);
+    }
+
 
     public static Long dealDayToDayEnd(Long date) {
         Calendar calendar = Calendar.getInstance();
