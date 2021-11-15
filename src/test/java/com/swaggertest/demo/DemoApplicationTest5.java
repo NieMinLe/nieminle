@@ -44,6 +44,9 @@ public class DemoApplicationTest5 {
         String supQuotationColumnValue = null;
         Assert.isTrue(!"REQUIRED".equals(quotationColumnValue) || null != supQuotationColumnValue, "error.quotation_detail.necessary_field.failed");
     }
+    @Test
+    public void test3(){
+    }
 
 
 
