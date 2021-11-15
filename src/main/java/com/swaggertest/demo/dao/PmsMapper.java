@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface PmsMapper{
 
-    List<PmsDTO> queryAll();
+    List<PmsDTO> queryAll(PmsDTO pmsDTO);
 
 
 }

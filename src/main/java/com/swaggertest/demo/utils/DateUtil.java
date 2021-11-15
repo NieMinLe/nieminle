@@ -29,6 +29,47 @@ public class DateUtil {
     }
 
     /**
+     * 获取某年最后一天日期
+     * @param year 年份
+     * @return Date
+     */
+    public static Date getYearLastDay(int year){
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(Calendar.YEAR, year);
+        calendar.roll(Calendar.DAY_OF_YEAR, -1);
+
+        return calendar.getTime();
+    }
+
+    /**
+     * 获取某年第一天日期
+     * @param year 年份
+     * @return Date
+     */
+    public static Date getYearOneDay(int year){
+        Calendar cal = Calendar.getInstance();
+        cal.clear();
+        cal.set(Calendar.YEAR, year);
+        int last = cal.getActualMinimum(Calendar.DAY_OF_YEAR);
+        cal.set(Calendar.DAY_OF_YEAR, last);
+        return cal.getTime();
+    }
+
+    /**
+     * 获取某年第一天日期
+     * @return Date
+     */
+    public static Date getYearOneAdd(Date time,int day){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(time);
+        cal.add(Calendar.DAY_OF_YEAR,day);
+        return cal.getTime();
+    }
+
+
+
+    /**
      * 获取当前时间的年份
      * @param date
      * @param year 需要加多少年
