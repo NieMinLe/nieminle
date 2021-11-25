@@ -1,6 +1,8 @@
 package com.swaggertest.demo.service;
 
 import com.swaggertest.demo.domain.dto.CateDTO;
+import com.swaggertest.demo.domain.dto.PmsCategoryDTO;
+
 import java.util.List;
 
 public interface CateService {
@@ -10,5 +12,9 @@ public interface CateService {
      * @return
      */
     List<CateDTO> threeLevelPullDown();
+
+    void insetPullDown(PmsCategoryDTO cateDTO);
+
+    List<PmsCategoryDTO> qryByName(String name);
 
 }

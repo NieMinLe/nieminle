@@ -7,7 +7,7 @@
                id AS subjectId,
                pid
         FROM
-            cate
+          pms_category
         WHERE
         pid IN
          <foreach collection="pidList" item="pid" open="(" separator="," close=")">
@@ -19,4 +19,13 @@
         ORDER BY
             weight ASC
     </select>
+
+    <insert id="insetPullDown">
+        insert into pms_category(name,cat_level) value ( #{name},#{catLevel} )
+    </insert>
+
+    <select id="qryByName" resultType="com.swaggertest.demo.domain.dto.PmsCategoryDTO">
+        select * from pms_category where name = #{name}
+    </select>
+
 </mapper>

@@ -4,6 +4,7 @@ import com.sun.deploy.panel.TreeBuilder;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,6 +34,9 @@ public class TestDto implements Serializable {
 
     @ApiModelProperty(name = "Sdept",value = "部门（长度4）", dataType = "String")
     private String  Sdept;
+
+    @ApiModelProperty(name = "Sdept",value = "部门（长度4）", dataType = "String")
+    private Date nml;
 
     private List<Long> test;
 

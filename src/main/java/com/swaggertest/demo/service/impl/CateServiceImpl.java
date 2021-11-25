@@ -3,17 +3,20 @@ package com.swaggertest.demo.service.impl;
 import com.google.common.collect.Lists;
 import com.swaggertest.demo.dao.CateDao;
 import com.swaggertest.demo.domain.dto.CateDTO;
+import com.swaggertest.demo.domain.dto.PmsCategoryDTO;
 import com.swaggertest.demo.domain.po.CatePO;
 import com.swaggertest.demo.service.CateService;
 import com.swaggertest.demo.system.enums.EnumOfDimensionDrillDown;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
-import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 @Service
 public class CateServiceImpl implements CateService {
@@ -27,6 +30,19 @@ public class CateServiceImpl implements CateService {
         List<CateDTO> dtos = reversal(list);
 
         return dtos;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void insetPullDown(PmsCategoryDTO cateDTO) {
+        cateDao.insetPullDown(cateDTO);
+        List<PmsCategoryDTO> test = cateDao.qryByName("我的名字");
+        System.out.println(test);
+    }
+
+    @Override
+    public List<PmsCategoryDTO> qryByName(String name) {
+        return cateDao.qryByName(name);
     }
 
 
