@@ -10,4 +10,8 @@
           </if>
       </where>
     </select>
+
+    <select id="qryThis" resultType="java.util.Map">
+      select * from pms_category where cat_id = #{catId}
+    </select>
 </mapper>

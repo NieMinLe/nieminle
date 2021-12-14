@@ -1,12 +1,10 @@
 package com.swaggertest.demo.dao;
 
 import com.swaggertest.demo.domain.dto.PmsDTO;
-import com.swaggertest.demo.domain.dto.TestDto;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface PmsMapper{

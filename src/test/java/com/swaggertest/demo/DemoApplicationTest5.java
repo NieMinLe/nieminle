@@ -96,6 +96,72 @@ public class DemoApplicationTest5 {
 
     }
 
+    @Test
+    public void test7(){
+        int [] a = new int[]{1,3,5,6,8};
+        int b = 4;
+        System.out.println("之前=-=-=" + JSONObject.toJSONString(a));
+        //如果有
+        for (int i=0;i < a.length; i++){
+            if(a[i] == b){
+                System.out.println("下标=" + i);
+            }
+        }
+
+        int a2[] = new int[a.length+1];
+        //如果所有数据都比b小
+        int max = a[a.length-1];
+        if(max < b){
+            for (int i=0;i<a.length;i++){
+                a2[i] = a[i];
+            }
+            a2[a.length] = b;
+            System.out.println("下标=="+a2.length);
+        }
+
+        //如果所有数据都比b大
+        int min = a[0];
+        if(min > b){
+            for (int i=0;i<a.length;i++){
+                a2[i+1] = a[i];
+            }
+            a2[0] = b;
+            System.out.println("下标=="+ 0);
+        }
+
+        //否则
+        int z = 0;
+        if(b >= min && b <= max){
+            for (int i = 0 ; i< a.length ; i++) {
+                if(a[i] >= b){
+                    z = i;
+                    break;
+                }
+            }
+
+            int j = 0;
+            for (int i = 0 ; i< a.length ; i++) {
+                a2[i] = a[i];
+                if(i == z){
+                    j = a[i];
+                    a2[z] = b;
+                    a2[i+1] = j;
+                    break;
+                }
+            }
+
+            for (int i = z ; i< a.length ; i++) {
+                a2[i+1] = a[i];
+            }
+        }
+
+
+        //设置一个新数组
+        System.out.println("输入中间的下标Z="+ z);
+        System.out.println("输出新数组a2="+ JSONObject.toJSONString(a2));
+
+    }
+
 
 }
 
