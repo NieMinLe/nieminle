@@ -14,7 +14,7 @@ public class PmsDTO implements Serializable {
     /**
      * 科目Id.
      */
-    private Long catId;
+    private List<Long> catIds;
 
     /**
      * 父级科目id.

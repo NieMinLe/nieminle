@@ -10,8 +10,7 @@ import org.springframework.util.StringUtils;
 /**
  * 日期处理util
  *
- * @author: zengkai
- * @since: 2019/9/11 13:27
+ * @author: nieminle
  */
 public class DateUtils {
 

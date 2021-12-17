@@ -1,11 +1,13 @@
 package com.swaggertest.demo.exception;
 
+import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.webApi.ApiResult;
 import com.swaggertest.demo.webApi.ResultCode;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -38,12 +40,13 @@ public class CustomException {
 
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public ApiResult indexOutException(Exception e, HttpServletRequest request) {
+    public ApiResult indexOutException(Exception e, HttpServletRequest request, TestDto testDto) {
         Map<String,Object> map = new HashMap();
         map.put("code",ResultCode.SYSTEM_INNER_ERROR);
         map.put("msg","这个是下标越界");
         map.put("下标越界的地方",request.getRequestURI());
         map.put("具体的位置是这里",e);
+        map.put("test",testDto.getSage());
         return ApiResult.failure(ResultCode.SYSTEM_INNER_ERROR,"这个是下标越界哦",Boolean.FALSE);
     }
 

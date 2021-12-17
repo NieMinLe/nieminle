@@ -17,6 +17,9 @@ import lombok.Data;
 @Table(name = "first")
 @ApiModel(value = "查询所有DTO")
 public class TestDto implements Serializable {
+
+    private Long catId;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(name = "Sno",value = "编号", dataType = "Integer")

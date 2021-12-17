@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
+import com.swaggertest.demo.domain.dto.PmsDTO;
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.domain.po.TestPo;
 import com.swaggertest.demo.domain.po.UserPo;
@@ -94,22 +95,17 @@ public class DemoApplicationTests {
 
     @Test
     public void mytest() {
-        TestPo testPo = new TestPo();
-        TestDto testDto = new TestDto();
-        testDto.setSex("男");
-        testDto.setSname("男人");
-        testDto.setSage(13);
-        testDto.setSdept("java");
-        testDto.setSno(10);
-
-        System.out.println(testPo);
-        System.out.println(testDto);
-
-        BeanUtils.copyProperties(testDto,testPo);
-
-        System.out.println(testPo);
-        System.out.println(testDto);
-
+        //前端传过来的值
+        PmsDTO pmsDTO = new PmsDTO();
+        //TestDto是我要更新表的实体类
+        List<TestDto> testDto = new ArrayList<>();
+        pmsDTO.getCatIds().forEach(item ->{
+            TestDto testDto1 = new TestDto();
+            BeanUtils.copyProperties(item,testDto1);
+            testDto1.setCatId(item);
+            testDto.add(testDto1);
+        });
+        //进行批量更新
     }
 
     @Test
