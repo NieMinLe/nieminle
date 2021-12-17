@@ -11,6 +11,6 @@ public interface PmsService {
      * 获取科目的三级下拉
      * @return
      */
-    List<PmsDTO> threeLevelPullDown(PmsDTO pmsDTO);
+    List<PmsDTO> threeLevelPullDown();
 
 }

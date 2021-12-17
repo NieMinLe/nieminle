@@ -4,11 +4,6 @@
     <!--通过明细模糊查询-->
     <select id="queryAll" resultType="com.swaggertest.demo.domain.dto.PmsDTO">
       select * from pms_category
-      <where>
-          <if test="name != null">
-            and name like CONCAT('%',#{name},'%')
-          </if>
-      </where>
     </select>
 
     <select id="qryThis" resultType="java.util.Map">

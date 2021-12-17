@@ -24,8 +24,8 @@ public class PmsServiceImpl implements PmsService {
     private PmsMapper pmsMapper;
 
     @Override
-    public List<PmsDTO> threeLevelPullDown(PmsDTO pmsDTO){
-        return pmsMapper.queryAll(pmsDTO);
+    public List<PmsDTO> threeLevelPullDown(){
+        return pmsMapper.queryAll();
     }
 
 }

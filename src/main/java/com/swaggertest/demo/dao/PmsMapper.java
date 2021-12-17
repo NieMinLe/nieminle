@@ -9,7 +9,8 @@ import java.util.Map;
 @Repository
 public interface PmsMapper{
 
-    List<PmsDTO> queryAll(PmsDTO pmsDTO);
+    List<PmsDTO> queryAll();
 
+    Map qryThis(Long catId);
 
 }
