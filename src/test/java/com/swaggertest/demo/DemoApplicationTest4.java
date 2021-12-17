@@ -5,14 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Preconditions;
 import com.swaggertest.demo.domain.dto.TestDto;
 import com.swaggertest.demo.utils.RedisUtil;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
@@ -21,6 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = DemoApplication.class)
@@ -153,6 +151,78 @@ public class DemoApplicationTest4 {
 
     }
 
+    @Test
+    public void test11(){
+        StringBuilder sqieIds = new StringBuilder();
+        System.out.println(sqieIds.length());
+        sqieIds.append("test");
+        System.out.println(sqieIds.length());
+
+        if(sqieIds.length() == 0){
+            System.out.println("这个是空的");
+        }
+
+    }
+
+    @Test
+    public void test12(){
+        String itemDesign = "E";
+        if(Objects.nonNull(itemDesign) && (itemDesign.equals("E") || itemDesign.equals("D"))){
+            System.out.println("输入E或者D了");
+        }
+
+    }
+
+    @Test
+    public void test13() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//格式化规则
+        Date n1 = new Date();
+        Date n2 = sdf.parse("2021-11-5");
+        System.out.println(sdf.format(n1));
+        System.out.println(sdf.format(n2));
+        System.out.println(n1.compareTo(n2));
+
+
+    }
+
+    @Test
+    public void test14(){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //获取当年最后一天
+//        Date one = DateUtil.getYearOneDay(DateUtil.getYear(new Date(),1));
+//        //获取当年第一天
+//        Date last = DateUtil.getYearLastDay(DateUtil.getYear(new Date(),1));
+//        //获取明天的天数
+//        Date tomorrow = DateUtil.getYearOneAdd(new Date(),1);
+
+//        System.out.println(formatter.format(one));
+//        System.out.println(formatter.format(last));
+//        System.out.println(formatter.format(new Date()));
+//        System.out.println(formatter.format(tomorrow));
+    }
+
+    @Test
+    public void test15(){
+        Set<Long> longSet = new HashSet<>();
+        longSet.add(1L);
+        longSet.add(2L);
+        longSet.add(3L);
+
+        List<Long> longList = Lists.newArrayList(longSet);
+
+        System.out.println(longSet);
+        System.out.println(longList);
+
+    }
+
+    @Test
+    public void test16(){
+        Set<String> test = new HashSet<>();
+
+        System.out.println(test);
+        System.out.println(StringUtils.join(test,","));
+
+    }
 
 
 
