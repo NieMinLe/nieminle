@@ -17,6 +17,7 @@ public class RedisConst {
 
   //token -> 用户
   public static String TOKEN_USER_INFO_CACHE_KEY = "data_open::token_user_info_cache_key::%s";
+
   //token -> 通行证
   public static String TOKEN_ACCESS_INFO_CACHE_KEY = "data_open::token_access_info_cache_key::%s";
 

@@ -47,7 +47,7 @@ public class CustomException {
         map.put("下标越界的地方",request.getRequestURI());
         map.put("具体的位置是这里",e);
         map.put("test",testDto.getSage());
-        return ApiResult.failure(ResultCode.SYSTEM_INNER_ERROR,"这个是下标越界哦",Boolean.FALSE);
+        return ApiResult.failure(ResultCode.SYSTEM_INNER_ERROR,"这个是下标越界啊",Boolean.FALSE);
     }
 
 }

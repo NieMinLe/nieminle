@@ -167,7 +167,7 @@ public class DemoApplicationTest2 {
     @Test
     public void test9(){
         //脱敏
-        String tuo = MyUtils.desensitizedPhoneNumber("1234");
+        String tuo = MyUtils.desensitizedPhoneNumber("18374722891");
         System.out.println(tuo);
     }
 
