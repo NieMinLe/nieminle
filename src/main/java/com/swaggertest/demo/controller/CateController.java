@@ -22,6 +22,27 @@ public class CateController {
     @Autowired
     private Test test;
 
+    @ApiOperation("查询所有数据")
+    @GetMapping("/qryAll")
+    public ApiResult qryAll(String name){
+        List<String> nameList = Arrays.asList(name.split(","));
+        List<PmsCategoryDTO> returnList = new ArrayList<>();
+
+        //创建多个线程
+        List<CompletableFuture<List<PmsCategoryDTO>>> taskList = nameList.stream()
+                .map(item -> CompletableFuture.supplyAsync(() -> cateService.qryAll(item))).collect(Collectors.toList());
+
+        //执行线程,join阻塞线程，获取CompletableFuture异步之后的返回值
+        CompletableFuture.allOf(taskList.toArray(new CompletableFuture[taskList.size()])).join();
+        //获取返回结果,getNow(null)方法在CompletableFuture完成的情况下会返回结果
+        taskList.stream().map(future -> future.getNow(null)).forEach(returnList::addAll);
+//        taskList.forEach(task ->{
+//            List<PmsCategoryDTO> tt = task.getNow(null);
+//            returnList.addAll(tt);
+//        });
+        return ApiResult.success(returnList);
+    }
+    
     @ApiOperation("查询科目的三级下拉")
     @GetMapping("/threeLevelPullDown")
     public ApiResult threeLevelPullDown(){
@@ -39,32 +60,5 @@ public class CateController {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
