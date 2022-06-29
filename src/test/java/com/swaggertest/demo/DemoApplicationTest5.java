@@ -110,7 +110,7 @@ public class DemoApplicationTest5 {
         System.out.println(mainData);
     }
 
-    @Test
+   @Test
     public void test6() {
 
         String str = "{\"esbInfo\":{\"requestTime\":\"2021-12-07T11:09:48.456+08:00\",\"instId\":\"<N3f578fc2.N74b8a023.0.17d92628435.N7d15>\",\"returnCode\":\"E\",\"responseTime\":\"2021-12-07T11:09:48.959+08:00\",\"returnStatus\":\"E\"},\"resultInfo\":{\"xReturnCode\":\"E\",\"xResponseData\":\"{\\\"supplierSchedulings\\\":[{\\\"sourceId\\\":242,\\\"itemNumber\\\":\\\"3924568\\\"\\r\\n,\\\"vendorNumber\\\":\\\"CO00048604\\\"\\r\\n,\\\"vendorSiteCode\\\":\\\"\\\\u95F4\\\\u6750\\\"\\r\\n,\\\"processStatus\\\":\\\"E\\\"\\r\\n,\\\"processMessage\\\":\\\"\\\\u4F9B\\\\u5E94\\\\u5546( CO00048604)\\\\u65E0\\\\u6548\\\\u6216\\\\u5728\\\\u7CFB\\\\u7EDF\\\\u4E2D\\\\u4E0D\\\\u5B58\\\\u5728\\\\u3002\\\"\\r\\n}]}\"}}";
