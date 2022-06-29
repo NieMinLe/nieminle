@@ -109,6 +109,62 @@ public class CateServiceImpl implements CateService {
         return cateDTOS;
     }
 
+    @SneakyThrows
+    @Override
+    public List<PmsCategoryDTO> qryAll(String name) {
+        System.out.println(name + "开始");
+        PmsCategoryDTO dto = new PmsCategoryDTO();
+        dto.setName(name);
+        List<PmsCategoryDTO> list = this.setBomByItemCode(dto);
+        this.setBomByItem(list);
 
+        System.out.println("合并前的数据"+ JSONObject.toJSONString(list));
+        List<PmsCategoryDTO> test = this.hebing(list);
+        System.out.println(name + "结束");
+        return test;
+    }
+    
+    public List<PmsCategoryDTO> setBomByItemCode(PmsCategoryDTO dto){
+        List<PmsCategoryDTO> dcecBomTiers = cateDao.qryAll(dto.getName());
+        if(dcecBomTiers.size() > 0){
+            for (PmsCategoryDTO bomTier : dcecBomTiers) {
+                //给第一层赋值
+                bomTier.setTier(dto.getTier()+1);
+                bomTier.setSubName(dto.getSubName());
+                bomTier.setUpMoney(dto.getUpMoney());
+                //递归查询下一层
+                if(Objects.nonNull(bomTier.getProductUnit())) {
+                    PmsCategoryDTO subDcecBomTier = new PmsCategoryDTO();
+                    subDcecBomTier.setName(bomTier.getProductUnit());
+                    subDcecBomTier.setTier(bomTier.getTier());
+                    subDcecBomTier.setSubName(bomTier.getName());
+                    subDcecBomTier.setUpMoney(bomTier.getMoney());
+                    bomTier.setChildren(this.setBomByItemCode(subDcecBomTier));
+                }
+            }
+        }
+
+        return dcecBomTiers;
+    }
+
+    public void setBomByItem(List<PmsCategoryDTO> dcecBomTiers){
+        dcecBomTiers.forEach(item ->{
+            if(CollectionUtils.isEmpty(item.getChildren())){
+                if(Objects.nonNull(item.getProductUnit())){
+                    PmsCategoryDTO children = new PmsCategoryDTO();
+                    children.setName(item.getProductUnit());
+                    children.setTier(item.getTier()+1);
+                    children.setChildren(Lists.newArrayList());
+                    children.setSubName(item.getName());
+                    children.setUpMoney(item.getMoney());
+                    children.setCatId(catId --);
+                    item.setChildren(Lists.newArrayList(children));
+                }
+            }else{
+                setBomByItem(item.getChildren());
+            }
+        });
+    }
+    
 
 }
