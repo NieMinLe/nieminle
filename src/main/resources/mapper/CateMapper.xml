@@ -4,28 +4,42 @@
     <!--通过明细模糊查询-->
     <select id="threeLevelPullDown" resultType="com.swaggertest.demo.domain.po.CatePO" parameterType="string">
         SELECT NAME AS subjectName,
-               id AS subjectId,
-               pid
+        id AS subjectId,
+        pid
         FROM
-          pms_category
+        pms_category
         WHERE
         pid IN
-         <foreach collection="pidList" item="pid" open="(" separator="," close=")">
-             #{pid}
-         </foreach>
+        <foreach collection="pidList" item="pid" open="(" separator="," close=")">
+            #{pid}
+        </foreach>
         AND
         show_dic_fk = 0
-          AND DISABLE = 0
+        AND DISABLE = 0
         ORDER BY
-            weight ASC
+        weight ASC
     </select>
 
-    <insert id="insetPullDown">
-        insert into pms_category(name,cat_level) value ( #{name},#{catLevel} )
+    <insert id="insetPullDown" useGeneratedKeys="true" keyProperty="catId" parameterType="com.swaggertest.demo.domain.dto.PmsCategoryDTO">
+        insert into pms_category(name,cat_level,money) value ( #{name},#{catLevel},#{money})
     </insert>
 
     <select id="qryByName" resultType="com.swaggertest.demo.domain.dto.PmsCategoryDTO">
+        select * from pms_category where name = #{name} and product_unit = #{productUnit}
+    </select>
+
+    <select id="qryAll" resultType="com.swaggertest.demo.domain.dto.PmsCategoryDTO">
         select * from pms_category where name = #{name}
+    </select>
+
+    <select id="qryDate" resultType="com.swaggertest.demo.domain.dto.PmsCategoryDTO">
+        SELECT
+            *
+        FROM
+            pms_category
+        WHERE
+                create_date &lt; date_sub( date_add( curdate( ), INTERVAL - DAY ( curdate( ) ) + 1 DAY ), INTERVAL #{day} MONTH )
+          AND create_date &gt;= date_sub( date_add( curdate( ), INTERVAL - DAY ( curdate( ) ) + 1 DAY ), INTERVAL #{day}+1 MONTH )
     </select>
 
 </mapper>

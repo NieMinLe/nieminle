@@ -1,10 +1,11 @@
 package com.swaggertest.demo;
 
-import com.swaggertest.demo.controller.RedAndBlue;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import com.swaggertest.demo.controller.testa.RedAndBlue;
 import org.junit.Test;
 
 public class RedAndBlueTest {

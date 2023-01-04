@@ -15,6 +15,10 @@ public interface CateService {
 
     void insetPullDown(PmsCategoryDTO cateDTO);
 
-    List<PmsCategoryDTO> qryByName(String name);
+    List<PmsCategoryDTO> qryByName(PmsCategoryDTO name);
+
+    void qryAll(String name);
+
+    List<PmsCategoryDTO> qryDate(Integer day);
 
 }
