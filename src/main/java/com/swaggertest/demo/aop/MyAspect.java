@@ -1,7 +1,6 @@
 package com.swaggertest.demo.aop;
 
 import com.swaggertest.demo.dao.TestMapper;
-import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -12,6 +11,8 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 @Slf4j
 @Aspect
@@ -28,7 +29,7 @@ public class MyAspect {
     public void myAuthPoint() {
     }
 
-    @Pointcut("execution(public * com.swaggertest.demo.controller.CateController.threeLevelPullDown())")
+    @Pointcut("execution(public * com.swaggertest.demo.controller.testa.CateController.threeLevelPullDown())")
     public void testPoint(){
 
     }

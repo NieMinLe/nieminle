@@ -2,12 +2,13 @@ package com.swaggertest.demo.domain.po;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
+import lombok.Data;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.Data;
+import java.io.Serializable;
 
 @Data
 @Table(name = "first")

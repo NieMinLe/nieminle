@@ -37,7 +37,7 @@ public class ApiResult {
 		return result;
 	}
 
-	    public static ApiResult success(Object data,Integer count) {
+	    public static ApiResult success(Object data, Integer count) {
 	        ApiResult result = new ApiResult();
 	        result.setResultCode(ResultCode.SUCCESS);
 	        result.setData(data);
@@ -45,7 +45,7 @@ public class ApiResult {
 	        return result;
 	    }
 
-	    public static ApiResult failure(ResultCode resultCode,String msg,Boolean flag) {
+	    public static ApiResult failure(ResultCode resultCode, String msg, Boolean flag) {
 	    	ApiResult result = new ApiResult();
 	        result.setResultCode(resultCode);
 	        result.setMsg(msg);

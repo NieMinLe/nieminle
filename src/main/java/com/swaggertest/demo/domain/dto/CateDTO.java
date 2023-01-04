@@ -1,9 +1,10 @@
 package com.swaggertest.demo.domain.dto;
 
 import com.swaggertest.demo.system.enums.EnumOfDimensionDrillDown;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
-import lombok.Data;
 
 /**
  * 科目层级下拉框PO.

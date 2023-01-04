@@ -1,10 +1,11 @@
 package com.swaggertest.demo.domain.dto;
 
 
+import lombok.Data;
+
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Table;
-import lombok.Data;
 
 @Data
 @Table(name = "first")

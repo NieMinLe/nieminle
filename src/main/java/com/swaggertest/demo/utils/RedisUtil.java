@@ -3,12 +3,13 @@ package com.swaggertest.demo.utils;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.swaggertest.demo.domain.dto.RedisDTO;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class RedisUtil {
@@ -35,7 +36,7 @@ public class RedisUtil {
 
 
   public void setCacheExpireTime(String key, Object data, Long expire, TimeUnit unit) {
-    redisTemplate.opsForValue().set(key,JSON.toJSONString(data),expire,unit);
+    redisTemplate.opsForValue().set(key, JSON.toJSONString(data),expire,unit);
   }
 
   public Boolean del(Object key) {

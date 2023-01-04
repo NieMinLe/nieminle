@@ -6,19 +6,16 @@ import com.swaggertest.demo.exception.MyException;
 import com.swaggertest.demo.system.consts.RedisConst;
 import com.swaggertest.demo.system.enums.EnumDataOpenCode;
 import com.swaggertest.demo.utils.RedisUtil;
-import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 /**
  * 权限校验切面.
@@ -101,7 +98,7 @@ public class AuthAspect {
             throw new MyException(EnumDataOpenCode.NO_PERMISSION.getCode(),"非法请求");
         }
 
-        TestDto po = JSONObject.parseObject(jsonStr.toString(),TestDto.class);
+        TestDto po = JSONObject.parseObject(jsonStr.toString(), TestDto.class);
 
         if (po.getSno() != methodAuth.level()) {
             throw new MyException(EnumDataOpenCode.NO_PERMISSION.getCode(),"权限不够");

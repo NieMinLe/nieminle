@@ -1,11 +1,12 @@
 package com.swaggertest.demo.utils;
 
+import org.springframework.util.StringUtils;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import org.springframework.util.StringUtils;
 
 /**
  * 日期处理util
@@ -147,5 +148,57 @@ public class DateUtils {
         calendar.add(Calendar.SECOND, num);
         Date newTime = calendar.getTime();
         return newTime;
+    }
+
+    /**
+     * 获取当前日期上一季度 开始时间
+     *
+     * @return
+     */
+    public static Date getStartQuarter(Date date) {
+        Calendar startCalendar = Calendar.getInstance();
+        startCalendar.setTime(date);
+        startCalendar.set(Calendar.MONTH, ((int) startCalendar.get(Calendar.MONTH) / 3 - 1) * 3);
+        startCalendar.set(Calendar.DAY_OF_MONTH, 1);
+        setMinTime(startCalendar);
+        return startCalendar.getTime();
+    }
+
+    /**
+     * 获取当前日期上一季度 结束时间
+     *
+     * @return
+     */
+    public static Date getLastQuarter(Date date) {
+        Calendar endCalendar = Calendar.getInstance();
+        endCalendar.setTime(date);
+        endCalendar.set(Calendar.MONTH, ((int) endCalendar.get(Calendar.MONTH) / 3 - 1) * 3 + 2);
+        endCalendar.set(Calendar.DAY_OF_MONTH, endCalendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        setMaxTime(endCalendar);
+
+        return endCalendar.getTime();
+    }
+    /**
+     * 最小时间
+     *
+     * @param calendar
+     */
+    private static void setMinTime(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+    }
+
+    /**
+     * 最大时间
+     *
+     * @param calendar
+     */
+    private static void setMaxTime(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getActualMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getActualMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getActualMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getActualMaximum(Calendar.MILLISECOND));
     }
 }

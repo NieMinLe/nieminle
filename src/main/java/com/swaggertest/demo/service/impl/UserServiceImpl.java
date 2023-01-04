@@ -3,9 +3,10 @@ package com.swaggertest.demo.service.impl;
 import com.swaggertest.demo.dao.UserMapper;
 import com.swaggertest.demo.domain.po.UserPo;
 import com.swaggertest.demo.service.UserService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {

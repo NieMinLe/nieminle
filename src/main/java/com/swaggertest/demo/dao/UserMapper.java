@@ -1,10 +1,11 @@
 package com.swaggertest.demo.dao;
 
 import com.swaggertest.demo.domain.po.UserPo;
-import java.util.List;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 @Repository
 public interface UserMapper  extends Mapper<UserPo> {

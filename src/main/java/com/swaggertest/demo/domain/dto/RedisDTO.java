@@ -1,10 +1,11 @@
 package com.swaggertest.demo.domain.dto;
 
-import java.util.concurrent.TimeUnit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.concurrent.TimeUnit;
 
 @Data //生成getter,setter等函数
 @Builder

@@ -30,7 +30,7 @@ public class CateServiceImpl implements CateService {
 
     @Override
     public List<CateDTO> threeLevelPullDown() {
-        List<CatePO> list = threeLevelPullDownToMapper(null,Lists.newArrayList(0L),EnumOfDimensionDrillDown.LEVEL1_ORG);
+        List<CatePO> list = threeLevelPullDownToMapper(null, Lists.newArrayList(0L),EnumOfDimensionDrillDown.LEVEL1_ORG);
         List<CateDTO> dtos = reversal(list);
 
         return dtos;
@@ -77,16 +77,16 @@ public class CateServiceImpl implements CateService {
         //去重后的子集
         List<PmsCategoryDTO> childrenListQu = childrenList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(PmsCategoryDTO ::getName))), ArrayList::new));
         newList.forEach(item ->{
-            if(item.getProductUnit() != null){
-                List<PmsCategoryDTO> realSon = new ArrayList<>();
-                childrenListQu.forEach(son ->{
-                    if(son.getSubName().equals(item.getName())){
-                        realSon.add(son);
-                    }
-                });
-                item.setChildren(realSon);
-                this.hebing(childrenList);
-            }
+                if(item.getProductUnit() != null){
+                    List<PmsCategoryDTO> realSon = new ArrayList<>();
+                    childrenListQu.forEach(son ->{
+                        if(son.getSubName().equals(item.getName())){
+                            realSon.add(son);
+                        }
+                    });
+                    item.setChildren(realSon);
+                    this.hebing(childrenList);
+                }
         });
         return newList;
     }
@@ -135,7 +135,7 @@ public class CateServiceImpl implements CateService {
 
 
 
-    public List<CatePO> threeLevelPullDownToMapper(List<CatePO> list,List<Long> pidList, EnumOfDimensionDrillDown drillDown){
+    public List<CatePO> threeLevelPullDownToMapper(List<CatePO> list, List<Long> pidList, EnumOfDimensionDrillDown drillDown){
         if(CollectionUtils.isEmpty(list)){
             list = cateDao.threeLevelPullDown(pidList);
             list.forEach(v -> v.setDrillDown(drillDown));

@@ -1,5 +1,6 @@
 package com.swaggertest.demo.utils;
 
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +12,45 @@ import java.util.Date;
  * @Version V1.0.0
  */
 public class DateUtil {
+
+    public static void classOfSrcResult(Object source, Object target) {
+        String srcValue = getClassValue(source, "Sname") == null ? "真的吗" : getClassValue(source, "Sname").toString();
+        System.out.println(srcValue);
+    }
+
+
+    private static Object getClassValue(Object obj, String fieldName) {
+        if (obj == null) {
+            return null;
+        } else {
+            try {
+                Class<? extends Object> beanClass = obj.getClass();
+                Method[] ms = beanClass.getMethods();
+                Method[] var4 = ms;
+                int var5 = ms.length;
+
+                for(int var6 = 0; var6 < var5; ++var6) {
+                    Method m = var4[var6];
+                    if (m.getName().startsWith("get")) {
+                        Object objValue;
+                        try {
+                            objValue = m.invoke(obj);
+                        } catch (Exception var10) {
+                            continue;
+                        }
+
+                        if (objValue != null && (m.getName().toUpperCase().equals(fieldName.toUpperCase()) || m.getName().substring(3).toUpperCase().equals(fieldName.toUpperCase()))) {
+                            return objValue;
+                        }
+                    }
+                }
+
+                return null;
+            } catch (Exception var11) {
+                return null;
+            }
+        }
+    }
 
     /**
      * 获取相加的N天
@@ -140,6 +180,24 @@ public class DateUtil {
 
     }
 
+    public static Boolean DateCompare(Date time1, Date time2, int numYear) {
+        Date time3 = add(time1, Calendar.YEAR, numYear);
+        time3 = add(time3, Calendar.DATE, -1);
+        if (time3.getTime() < time2.getTime()) {
+            return true;
+        }
+        return false;
+    }
+
+    public static Date add(final Date date, final int calendarField, final int amount) {
+        if (date == null) {
+            return null;
+        }
+        final Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(calendarField, amount);
+        return c.getTime();
+    }
 
 }
 

@@ -1,17 +1,18 @@
 package com.swaggertest.demo.domain.dto;
 
-import com.sun.deploy.panel.TreeBuilder;
+import com.alibaba.fastjson.annotation.JSONField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import lombok.Data;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import lombok.Data;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 @Data
 @Table(name = "first")
@@ -19,6 +20,9 @@ import lombok.Data;
 public class TestDto implements Serializable {
 
     private Long catId;
+    private Date test1;
+    private Date test2;
+    private Integer inta;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,5 +46,10 @@ public class TestDto implements Serializable {
     private Date nml;
 
     private List<Long> test;
+
+    private Boolean flag;
+
+    @JSONField(name = "VBELN")
+    private String VBELN;
 
 }

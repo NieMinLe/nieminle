@@ -1,10 +1,11 @@
 package com.swaggertest.demo.param;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Data;
 
 @Data
 public class TestParam {

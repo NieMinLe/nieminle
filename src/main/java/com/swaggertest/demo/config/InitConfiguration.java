@@ -1,5 +1,6 @@
 package com.swaggertest.demo.config;
 
+import com.swaggertest.demo.controller.testa.UserController;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +10,7 @@ import javax.annotation.PostConstruct;
 @Data
 public class InitConfiguration {
 
-  private com.swaggertest.demo.controller.testa.UserController userController;
+  private UserController userController;
 
   @PostConstruct
   public void init(){
