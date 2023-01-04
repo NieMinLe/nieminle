@@ -235,6 +235,11 @@ public class DemoApplicationTest5 {
 
     }
 
+    @Test
+    public void test9(){
+        System.out.println("测试提交");
+    }
+
 }
 
 
