@@ -18,6 +18,6 @@ public interface UserMapper  extends Mapper<UserPo> {
 
     UserPo find(UserPo userPo);
 
-    @Select("select * from user")
+    @Select("select * from test")
     List<UserPo> getAllUser();
 }

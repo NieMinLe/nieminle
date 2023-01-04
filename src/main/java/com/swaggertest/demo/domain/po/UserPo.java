@@ -19,10 +19,10 @@ public class UserPo {
     @ApiModelProperty(name = "id",value = "编号", dataType = "Integer")
     private Integer id;
 
-    @ApiModelProperty(name = "username",value = "名字", dataType = "String")
-    private String username;
+    @ApiModelProperty(name = "s1",value = "名字", dataType = "String")
+    private String s1;
 
-    @ApiModelProperty(name = "password",value = "密码", dataType = "String")
-    private String password;
+    @ApiModelProperty(name = "s2",value = "密码", dataType = "String")
+    private String s2;
 
 }

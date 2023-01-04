@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 /**
  * 权限校验切面.
@@ -113,7 +112,7 @@ public class AuthAspect {
      */
     @AfterReturning(returning = "obj", pointcut = "requestPoint()")
     public void doAfterReturning(Object obj) {
-        log.info("response = {}", Optional.ofNullable(obj).orElse(""));
+//        log.info("response是等于这个变量 = {}", Optional.ofNullable(obj).orElse(""));
     }
 
 }

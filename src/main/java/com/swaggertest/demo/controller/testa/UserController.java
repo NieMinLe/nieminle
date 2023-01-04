@@ -31,7 +31,7 @@ public class UserController {
     @PostMapping(value = "/insertUser")
     @ResponseBody
     public Integer insert(@RequestBody UserPo userPo){
-        if (userPo.getUsername() != null && userPo.getPassword() != null){
+        if (userPo.getS1() != null && userPo.getS2() != null){
             userService.insertUser(userPo);
             return 1;
         }

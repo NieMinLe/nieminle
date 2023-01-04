@@ -269,8 +269,8 @@ public class DemoApplicationTests {
     public void test9(){
 
         UserPo userPo = new UserPo();
-        userPo.setUsername("名字1");
-        userPo.setPassword("密码1");
+        userPo.setS1("名字1");
+        userPo.setS2("密码1");
 
         List<UserPo> list1 = Lists.newArrayList(userPo);
 
@@ -279,8 +279,8 @@ public class DemoApplicationTests {
         System.out.println(map);
 
         UserPo userPo2 = new UserPo();
-        userPo2.setUsername("名字2");
-        userPo2.setPassword("密码2");
+        userPo2.setS1("名字2");
+        userPo2.setS2("密码2");
 
         map.get(1).add(userPo2);
         System.out.println(map);

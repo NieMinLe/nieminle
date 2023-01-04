@@ -1,29 +1,26 @@
 package com.swaggertest.demo.servlet;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import com.swaggertest.demo.interceptor.OpenInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
+public class WebConfig implements WebMvcConfigurer {
 
-    @SuppressWarnings("unused")
-    private ApplicationContext applicationContext;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
+//    @Bean
+//    public OpenInterceptor tokenInterceptor() {
+//        return new OpenInterceptor();
+//    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加拦截的请求，并排除几个不拦截的请求
-        registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-            .excludePathPatterns("/login","/submit","/demo");
+//        registry.addInterceptor(new OpenInterceptor()).addPathPatterns("/**")
+//            .excludePathPatterns("/login","/submit","/demo");
+        registry.addInterceptor(new OpenInterceptor()).excludePathPatterns("/interceptor/demo*","/swagger**/**").addPathPatterns("/**");
     }
 
 }
