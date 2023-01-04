@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/interceptor")
 public class InterceptorController {
 
-
-    @GetMapping("/demo123")
-    public String demoAction() {
-        System.out.println("开始输入");
+    @GetMapping("/demo")
+    public String demoAction(String param) {
+        System.out.println("开始输入=-=-"+param);
         return "success";
     }
 
