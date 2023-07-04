@@ -11,4 +11,6 @@ public class FatherDTO {
 
     private String test2;
 
+    private Long subjectId;
+
 }

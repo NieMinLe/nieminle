@@ -239,13 +239,11 @@ public class DemoApplicationTests {
 
     @Test
     public void test7(){
-        Boolean b = NumberUtils.isDigits("123");
-        Boolean b1 = NumberUtils.isDigits("123a");
-        Boolean b2 = NumberUtils.isDigits("-123123123123");
+        Double distanceDubbo = 0.00000000000;
 
-        System.out.println(b);
-        System.out.println(b1);
-        System.out.println(b2);
+        if(distanceDubbo.equals(0.00000000000)){
+            System.out.println("客户暂无定位信息");
+        }
 
     }
 

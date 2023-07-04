@@ -1,30 +1,50 @@
 package com.swaggertest.demo;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONObjectIter;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.swaggertest.demo.annotation.ColumnConf;
 import com.swaggertest.demo.dao.PmsMapper;
 import com.swaggertest.demo.domain.dto.CmsMoreDeliveryResultInfoDTO;
 import com.swaggertest.demo.domain.dto.PmsDTO;
 import com.swaggertest.demo.domain.dto.TestDto;
+import com.swaggertest.demo.domain.dto.TestDto1;
 import com.swaggertest.demo.service.PmsService;
 import com.swaggertest.demo.utils.DateUtil;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
+import org.gavaghan.geodesy.Ellipsoid;
+import org.gavaghan.geodesy.GeodeticCalculator;
+import org.gavaghan.geodesy.GeodeticCurve;
+import org.gavaghan.geodesy.GlobalCoordinates;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.security.MessageDigest;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -71,15 +91,21 @@ public class DemoApplicationTest5 {
         List<TestDto> list1 = new ArrayList<>();
         TestDto t1 = new TestDto();
         t1.setNml(time);
+        t1.setSage(1);
+        t1.setSname("我是名字1");
         list1.add(t1);
 
         List<TestDto> list2 = new ArrayList<>();
         TestDto t2 = new TestDto();
         t2.setNml(new Date());
+        t2.setSage(1);
+        t2.setSname("我是名字2");
         list2.add(t2);
         list1.addAll(list2);
 
         List<TestDto> fixedLinesLast = list1.stream().sorted(Comparator.comparing(TestDto::getNml)).collect(Collectors.toList());
+        TestDto tt = list1.stream().min(Comparator.comparing(TestDto::getSage)).get();
+        System.out.println("tt====="+tt);
         System.out.println(fixedLinesLast);
         for (int i = 1; i < fixedLinesLast.size(); i++) {
             //获取上一条数据的失效日期
@@ -237,7 +263,202 @@ public class DemoApplicationTest5 {
 
     @Test
     public void test9(){
-        System.out.println("测试提交");
+        //之前所有发送过的
+        List<TestDto> t1 = new ArrayList<>();
+        TestDto tt1 = new TestDto();
+        tt1.setSname("张1");
+        tt1.setCatId(1L);
+        t1.add(tt1);
+
+        TestDto tt2 = new TestDto();
+        tt2.setSname("张1");
+        tt2.setCatId(2L);
+        t1.add(tt2);
+
+        //集合的交集
+        List<String> test = t1.stream().map(TestDto::getSname).collect(Collectors.toList()).stream().distinct().collect(Collectors.toList());
+
+        System.out.println(""+test);
+    }
+
+    @Test
+    public void test10(){
+        List<Integer> nums = Lists.newArrayList(1,2,3,4,5,6,7,8);
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() ->{
+           int sum = 0;
+            for (Integer num : nums) {
+                sum += num;
+            }
+            return sum;
+        });
+        future.thenAccept(s -> System.out.println(s));
+        CompletableFuture<Integer> test = future.thenApply((s) ->{
+            System.out.println("这是获取所有的结果之后的值");
+            return 1;
+        });
+
+
+    }
+
+    @Test
+    public void test11(){
+
+        double radLat1 = Math.toRadians(Double.parseDouble("30.267023"));
+        double radLat2 =  - Math.toRadians(Double.parseDouble("113.11794000000"));
+        double a = radLat1 - radLat2;
+        double b = Math.toRadians(Double.parseDouble("120.107822")) - Math.toRadians(Double.parseDouble("28.20227600000"));
+
+        double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * 6371.393;
+        s = Math.round(s * 10000) / 10000;
+        System.out.println(s);
+        DecimalFormat df = new DecimalFormat("######0.00");
+        Double f = Double.parseDouble(df.format(s));
+        if (f > 1000) {
+            double d = f / 1000;
+            System.out.println("距你" + String.format("%.1f", d) + "km");
+        } else {
+            System.out.println("距你" + f.intValue() + "m");
+        }
+
+    }
+
+    @Test
+    public void test12(){
+//        double lat1 = 28.20228400000;        //当前位置纬度
+//        double lon1 = 113.11796800000;       //当前位置经度
+        double lat1 = 28.20227600000;        //签到位置纬度
+        double lon1 = 113.11794000000;       //签到位置经度
+        double lat2 = 28.195575000000000;       //用户纬度
+        double lon2 = 113.101209000000000;      //用户经度
+        GlobalCoordinates source = new GlobalCoordinates(lat1, lon1);
+        GlobalCoordinates target  = new GlobalCoordinates(lat2, lon2);
+        GeodeticCurve geodeticCurve = new GeodeticCalculator().calculateGeodeticCurve(Ellipsoid.WGS84, source, target);
+        double distance = geodeticCurve.getEllipsoidalDistance();
+        if (distance > 1000) {
+            double d = distance / 1000;
+            System.out.println("距你" + String.format("%.1f", d) + "km");
+        } else {
+            System.out.println("距你" + distance + "m");
+        }
+    }
+
+    @Test
+    public void test13(){
+        double kjingdu1 = Double.parseDouble("112.938814") * Math.PI / 180.0;                  //用户经度
+        double jingdu1 = Double.parseDouble("113.117984") * Math.PI / 180.0;            //当前经度
+        double b = kjingdu1 - jingdu1;
+
+        double kweidu1 = Double.parseDouble("28.202277") * Math.PI / 180.0;                    //用户纬度
+        double weidu1 = Double.parseDouble("28.228209") * Math.PI / 180.0;              //当前纬度
+        double a = kweidu1 - weidu1;
+
+        double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(kweidu1) * Math.cos(weidu1) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * 6371000;
+        s = Math.round(s * 10000) / 10000;
+        DecimalFormat df = new DecimalFormat("######0.00");
+        Double f = Double.parseDouble(df.format(s));
+        if (f > 1000) {
+            double d = f / 1000;
+            System.out.println(String.format("%.1f", d) + "km");
+        } else {
+            System.out.println(f.intValue() + "m");
+        }
+
+    }
+
+    @Test
+    public void test1231(){
+        double test = 4.28;
+        String sa = "";
+        if(test >= 1000){
+            sa = new DecimalFormat("#.00").format(test / 1000) + "km";
+        }else{
+            sa = test + "m";
+        }
+        System.out.println(sa);
+    }
+
+    @Test
+    public void test14(){
+//        String path = "o2o/19d4646f773b41a6b191df6d4fc8f2fc.png";
+        String path = "C:\\Users\\TMX121\\AppData\\Local\\Temp\\tomcat.3946511636785510675.8010\\work\\Tomcat\\localhost\\ROOT\\upload_a967958d_b962_4cdf_b59d_47f71c2a4059_00000000.tmp";
+//        String path = "C:\\Users\\TMX121\\AppData\\Local\\Temp\\tomcat.4292607592358074842.8010\\work\\Tomcat\\localhost\\ROOT";
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            FileInputStream fis = new FileInputStream(path);
+            byte[] buffer = new byte[1024];
+            int length = -1;
+            while ((length = fis.read(buffer)) != -1) {
+                md.update(buffer, 0, length);
+            }
+            fis.close();
+            byte[] digest = md.digest();
+            BigInteger bigInt = new BigInteger(1, digest);
+            System.out.println(bigInt.toString(16));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test15(){
+        TestDto t1 = new TestDto();
+        t1.setSno(1);
+        t1.setSage(1);
+
+        if(Objects.nonNull(t1.getInta())){
+            System.out.println("inta不为空");
+        }else if(Objects.nonNull(t1.getSage())){
+            System.out.println("年龄不为空");
+        }else if(Objects.nonNull(t1.getSno())){
+            System.out.println("编号不为空");
+        }
+
+        if(Objects.nonNull(t1.getSage())){
+            System.out.println("年龄不为空2");
+        }
+        if(Objects.nonNull(t1.getSno())){
+            System.out.println("编号不为空2");
+        }
+        if(Objects.nonNull(t1.getInta())){
+            System.out.println("inta不为空2");
+        }
+
+    }
+
+    @Test
+    public void test16(){
+        List<Map<String, String>> list = new ArrayList<>();
+        Field[] fields = TestDto.class.getDeclaredFields();
+        for (Field field : fields) {
+            Map<String, String> map = new ConcurrentHashMap<>();
+            ColumnConf cc = field.getAnnotation(ColumnConf.class);
+            if (cc == null) {
+                continue;
+            }
+            map.put("code", field.getName());
+            map.put("title", cc.value());
+            list.add(map);
+        }
+
+        System.out.println(JSONObject.toJSONString(list));
+
+    }
+    @Test
+    public void test17(){
+//        String json = "{Sname:John,Sage:30,Sdept:我是这个部门的}";
+//        String json = "{\"Sname\":\"聂闽乐\", \"Sage\":30,\"Sdept\":\"我是这个部门的\"}";
+        String json = "{\"sage\":30,\"sdept\":\"我是这个部门的\",\"sname\":\"聂闽乐\"}";
+
+        //JSON转实体类
+        TestDto person = JSON.parseObject(json,TestDto.class);
+        System.out.println(person);
+
+        //实体类转JSON
+        String jsat = JSONObject.toJSONString(person);
+        System.out.println(jsat);
+
     }
 
 }
