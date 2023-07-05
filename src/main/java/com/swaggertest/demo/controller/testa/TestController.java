@@ -32,8 +32,8 @@ public class TestController {
     @Autowired
     private TestService testService;
 
-    @Autowired
-    private RedisUtil redisUtil;
+//    @Autowired
+//    private RedisUtil redisUtil;
 
     @ApiOperation("多线程查询数据")
     @GetMapping("/query1")

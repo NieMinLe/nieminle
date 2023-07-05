@@ -8,13 +8,14 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
 public class RedisUtil {
-  @Autowired
-  private RedisTemplate redisTemplate;
+//  @Resource
+//  private RedisTemplate redisTemplate;
 
   private static final String activeName = "activeUser:";
 
@@ -22,50 +23,52 @@ public class RedisUtil {
     del(activeName);
     List<Long> te = Lists.newArrayList(1L,2L,3L,4L,5L,6L,7L,8L,9L,10L);
     te.forEach(v ->{
-      redisTemplate.opsForValue().setBit(activeName,v,true);
+//      redisTemplate.opsForValue().setBit(activeName,v,true);
     });
   }
 
   public Boolean getRedisBitMap(Long id) {
-    return redisTemplate.opsForValue().getBit(activeName,id);
+//    return redisTemplate.opsForValue().getBit(activeName,id);
+    return null;
   }
 
   public void setCache(String key,Object data) {
-    redisTemplate.opsForValue().set(key, JSON.toJSONString(data));
+//    redisTemplate.opsForValue().set(key, JSON.toJSONString(data));
   }
 
 
   public void setCacheExpireTime(String key, Object data, Long expire, TimeUnit unit) {
-    redisTemplate.opsForValue().set(key, JSON.toJSONString(data),expire,unit);
+//    redisTemplate.opsForValue().set(key, JSON.toJSONString(data),expire,unit);
   }
 
   public Boolean del(Object key) {
-    return redisTemplate.delete(key);
+//    return redisTemplate.delete(key);
+    return null;
   }
   public void delBatchCache(List<String> list) {
-    redisTemplate.executePipelined((RedisCallback<Object>) connection -> {
-      list.forEach(obj->{
-        connection.del(obj.getBytes());
-      });
-      return null;
-    });
+//    redisTemplate.executePipelined((RedisCallback<Object>) connection -> {
+//      list.forEach(obj->{
+//        connection.del(obj.getBytes());
+//      });
+//      return null;
+//    });
   }
 
   public void setCacheByObject(List<RedisDTO> list) {
-    redisTemplate.executePipelined((RedisCallback<Object>) connection -> {
-      list.forEach(obj->{
-        connection.set(obj.getKey().toString().getBytes(), JSON.toJSONString(obj.getData()).getBytes());
-        if(null != obj.getExpire()){
-          connection.expire(obj.getKey().toString().getBytes(), obj.getExpire());
-        }
-      });
-      return null;
-    });
+//    redisTemplate.executePipelined((RedisCallback<Object>) connection -> {
+//      list.forEach(obj->{
+//        connection.set(obj.getKey().toString().getBytes(), JSON.toJSONString(obj.getData()).getBytes());
+//        if(null != obj.getExpire()){
+//          connection.expire(obj.getKey().toString().getBytes(), obj.getExpire());
+//        }
+//      });
+//      return null;
+//    });
   }
 
-
   public Object getCacheObject(String key){
-    return redisTemplate.opsForValue().get(key);
+//    return redisTemplate.opsForValue().get(key);
+    return null;
   }
 
 }

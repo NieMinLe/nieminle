@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class OpenInterceptor implements HandlerInterceptor {
 
-  @Autowired
-  private RedisUtil redisUtil;
+//  @Autowired
+//  private RedisUtil redisUtil;
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

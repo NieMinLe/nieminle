@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONObjectIter;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.swaggertest.demo.annotation.ColumnConf;
 import com.swaggertest.demo.dao.PmsMapper;
@@ -16,10 +17,6 @@ import com.swaggertest.demo.utils.DateUtil;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Lists;
-import org.gavaghan.geodesy.Ellipsoid;
-import org.gavaghan.geodesy.GeodeticCalculator;
-import org.gavaghan.geodesy.GeodeticCurve;
-import org.gavaghan.geodesy.GlobalCoordinates;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -324,26 +321,6 @@ public class DemoApplicationTest5 {
     }
 
     @Test
-    public void test12(){
-//        double lat1 = 28.20228400000;        //当前位置纬度
-//        double lon1 = 113.11796800000;       //当前位置经度
-        double lat1 = 28.20227600000;        //签到位置纬度
-        double lon1 = 113.11794000000;       //签到位置经度
-        double lat2 = 28.195575000000000;       //用户纬度
-        double lon2 = 113.101209000000000;      //用户经度
-        GlobalCoordinates source = new GlobalCoordinates(lat1, lon1);
-        GlobalCoordinates target  = new GlobalCoordinates(lat2, lon2);
-        GeodeticCurve geodeticCurve = new GeodeticCalculator().calculateGeodeticCurve(Ellipsoid.WGS84, source, target);
-        double distance = geodeticCurve.getEllipsoidalDistance();
-        if (distance > 1000) {
-            double d = distance / 1000;
-            System.out.println("距你" + String.format("%.1f", d) + "km");
-        } else {
-            System.out.println("距你" + distance + "m");
-        }
-    }
-
-    @Test
     public void test13(){
         double kjingdu1 = Double.parseDouble("112.938814") * Math.PI / 180.0;                  //用户经度
         double jingdu1 = Double.parseDouble("113.117984") * Math.PI / 180.0;            //当前经度
@@ -459,6 +436,36 @@ public class DemoApplicationTest5 {
         String jsat = JSONObject.toJSONString(person);
         System.out.println(jsat);
         //修改数据
+
+    }
+
+    @Test
+    public void test18(){
+
+        List<TestDto> list = new ArrayList<>();
+        TestDto t1 = new TestDto();
+        t1.setSdept("部门1");
+        t1.setSage(12);
+
+        TestDto t2 = new TestDto();
+        t2.setSdept("部门2");
+        t2.setSage(14);
+        list.add(t1);
+        list.add(t2);
+
+        //list实体类转JSON
+        String json = JSONObject.toJSONString(list);
+        System.out.println(json);
+
+        List<TestDto> personList = new ArrayList<>();
+        //JSON转list实体类
+        try {
+            personList = objectMapper.readValue(json, new TypeReference<List<TestDto>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(personList);
+
 
     }
 

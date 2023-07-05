@@ -22,8 +22,8 @@ import org.springframework.web.client.RestTemplate;
 @Api(value = "testController", tags = "短信测试")
 public class DxController {
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
 
     /**
      * 单发短信测试
@@ -53,8 +53,8 @@ public class DxController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<String> httpEntity = new HttpEntity<String>(json, headers);
-        String result = restTemplate.postForObject(url, httpEntity, String.class);
-        return result;
+//        String result = restTemplate.postForObject(url, httpEntity, String.class);
+        return null;
     }
 
     /**
@@ -85,7 +85,7 @@ public class DxController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<String> httpEntity = new HttpEntity<String>(json, headers);
-        String result = restTemplate.postForObject(url, httpEntity, String.class);
-        return result;
+//        String result = restTemplate.postForObject(url, httpEntity, String.class);
+        return null;
     }
 }
