@@ -3,16 +3,18 @@ package com.swaggertest.demo;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONObjectIter;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.swaggertest.demo.annotation.ColumnConf;
 import com.swaggertest.demo.dao.PmsMapper;
-import com.swaggertest.demo.domain.dto.CmsMoreDeliveryResultInfoDTO;
-import com.swaggertest.demo.domain.dto.PmsDTO;
-import com.swaggertest.demo.domain.dto.TestDto;
-import com.swaggertest.demo.domain.dto.TestDto1;
+import com.swaggertest.demo.domain.dto.*;
+import com.swaggertest.demo.domain.po.CatePO;
 import com.swaggertest.demo.service.PmsService;
+import com.swaggertest.demo.system.enums.EnumApplyStatus;
 import com.swaggertest.demo.utils.DateUtil;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -465,8 +467,231 @@ public class DemoApplicationTest5 {
             e.printStackTrace();
         }
         System.out.println(personList);
+    }
 
+    @Test
+    public void test19() throws IllegalAccessException {
+        CustomerCollectDetail customerCollectDetail = new CustomerCollectDetail();
+        customerCollectDetail.setCustomerName("我是客户名称啊");
+        customerCollectDetail.setCustomerType("我是客户类型啊");
+        List<First> businessScopes = new ArrayList<>();
+        First f1 = new First();
+        f1.setSno(1);
+        First f2 = new First();
+        f2.setSno(2);
+        businessScopes.add(f1);
+        businessScopes.add(f2);
+        customerCollectDetail.setBusinessScopes(businessScopes);
 
+        Map<String,String> stringMap = customerCollectDetail.test(customerCollectDetail);
+
+        CustomerCollectDetail c1 = new CustomerCollectDetail();
+        c1.setCustomerName("我是老值");
+        Map<String,String> stringMap2 = customerCollectDetail.test(c1);
+        List<TestDto> tt = new ArrayList<>();
+        stringMap.forEach((k,v) ->{
+            TestDto t1 = new TestDto();
+            t1.setSex(k);
+            t1.setSdept(v);
+            t1.setSname(stringMap2.get(k));
+            if(k.equals("主营产品种类")){
+                t1.setSno(1);
+            }
+            tt.add(t1);
+        });
+        System.out.println(stringMap);
+        System.out.println(tt);
+    }
+
+    @Test
+    public void test20(){
+        BigDecimal test = new BigDecimal(23.545);
+        BigDecimal test1 = new BigDecimal(12.32);
+        System.out.println(test.multiply(test1));
+        System.out.println(test.multiply(test1).setScale(0,RoundingMode.CEILING));
+    }
+
+    @Test
+    public void test22(){
+        List<TestDto> test = new ArrayList<>();
+        TestDto t1 = new TestDto();
+        t1.setSex("男");
+        t1.setSname("我的名字");
+        TestDto t2 = new TestDto();
+        t2.setSex("女");
+        t2.setSname("你的名字");
+        test.add(t1);
+        test.add(t2);
+        String[] newString = new String[test.size()];
+        for (int i = 0; i < test.size(); i++) {
+            newString[i] = test.get(i).getSname();
+        }
+
+        // 打印数组元素
+        System.out.println(newString);
+        System.out.println(JSONObject.toJSONString(newString));
+    }
+
+    @Test
+    public void test23(){
+        List<CityDto> cityDtoList = new ArrayList<>();
+        CityDto cityDto1 = new CityDto();
+        cityDto1.setProvinceCode("230000");
+        cityDto1.setCityCode("230000");
+        cityDto1.setAreaCode("230000");
+        cityDto1.setTownCode("2300001");
+
+        CityDto cityDto2 = new CityDto();
+        cityDto2.setProvinceCode("230000");
+        cityDto2.setCityCode("230000");
+        cityDto2.setAreaCode("230000");
+        cityDto2.setTownCode("2300002");
+
+        CityDto cityDto3 = new CityDto();
+        cityDto3.setProvinceCode("230000");
+        cityDto3.setCityCode("230000");
+        cityDto3.setAreaCode("230000");
+        cityDto3.setTownCode("2300003");
+
+        cityDtoList.add(cityDto1);
+        cityDtoList.add(cityDto2);
+        cityDtoList.add(cityDto3);
+
+        List<CityDto> newCity = new ArrayList<>();
+        Boolean customerNameFlag = cityDtoList.stream().filter(v -> "1".equals(v.getProvinceCode())).findAny().isPresent();
+        if(customerNameFlag){
+            CityDto c1 = cityDtoList.stream().filter(v -> "1".equals(v.getProvinceCode())).collect(Collectors.toList()).get(0);
+            newCity.add(c1);
+        }else{
+            //先把同一个省份的数据拿过来进行遍历
+            Map<String,List<CityDto>> provinceMap = cityDtoList.stream().filter(e -> e.getCityCode() != null).collect(Collectors.groupingBy(CityDto::getProvinceCode));
+            Set<Map.Entry<String,List<CityDto>>> provinceMapEntries = provinceMap.entrySet();
+            for (Map.Entry<String, List<CityDto>> provinceEntry : provinceMapEntries) {
+                //再把同一个市的数据拿过来进行遍历,key是市code,如果有市code=1,说明选择了暂不选择
+                Map<String,List<CityDto>> cityMap = provinceEntry.getValue().stream().filter(e -> e.getCityCode() != null).collect(Collectors.groupingBy(CityDto::getCityCode));
+                Set<Map.Entry<String,List<CityDto>>> cityMapEntries = cityMap.entrySet();
+                for (Map.Entry<String, List<CityDto>> cityMapEntry : cityMapEntries) {
+                    if("1".equals(cityMapEntry.getKey())){
+                        //如果是暂不选择就把其他同省的数据清空,只留下暂不选择的省
+                        newCity.removeIf(v -> v.getProvinceCode().equals(cityMapEntry.getValue().get(0).getProvinceCode()));
+                        //把这条暂不选择的数据留下
+                        newCity.add(cityMapEntry.getValue().get(0));
+                        break;
+                    }else{
+                        //再把同一个区的数据拿过来进行遍历,key是区code,如果有区code=1,说明选择了暂不选择
+                        Map<String,List<CityDto>> areaMap = cityMapEntry.getValue().stream().filter(e -> e.getAreaCode() != null).collect(Collectors.groupingBy(CityDto::getAreaCode));
+                        Set<Map.Entry<String,List<CityDto>>> areaMapEntries = areaMap.entrySet();
+                        for (Map.Entry<String, List<CityDto>> areaMapEntry : areaMapEntries) {
+                            if("1".equals(areaMapEntry.getKey())){
+                                //如果是暂不选择就把其他同市的数据清空,只留下暂不选择的市
+                                newCity.removeIf(v -> v.getCityCode().equals(areaMapEntry.getValue().get(0).getCityCode()));
+                                newCity.add(areaMapEntry.getValue().get(0));
+                                break;
+                            }else{
+                                //再把同一个镇的数据拿过来进行遍历,key是镇code,如果有镇code=1,说明选择了暂不选择
+                                Map<String,List<CityDto>> townMap = areaMapEntry.getValue().stream().filter(e -> e.getTownCode() != null).collect(Collectors.groupingBy(CityDto::getTownCode));
+                                Set<Map.Entry<String,List<CityDto>>> townMapEntries = townMap.entrySet();
+                                for (Map.Entry<String, List<CityDto>> townMapEntry : townMapEntries) {
+                                    if("1".equals(townMapEntry.getKey())){
+                                        //如果是暂不选择就把其他同区的数据清空,只留下暂不选择的区
+                                        newCity.removeIf(v -> areaMapEntry.getValue().get(0).getAreaCode().equals(v.getAreaCode()));
+                                        newCity.add(townMapEntry.getValue().get(0));
+                                        break;
+                                    }else{
+                                        newCity.addAll(townMapEntry.getValue());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println("最后的数据"+JSONObject.toJSONString(newCity));
+
+    }
+
+    @Test
+    public void test24(){
+        List<CityDto> lastData = new ArrayList<>();
+        CityDto cityDto1 = new CityDto();
+        cityDto1.setProvinceCode("230000");
+        cityDto1.setCityCode("230300");
+        cityDto1.setAreaCode("230305");
+        cityDto1.setTownCode("1");
+
+        CityDto cityDto2 = new CityDto();
+        cityDto2.setProvinceCode("140000");
+        cityDto2.setCityCode("1");
+
+        CityDto cityDto3 = new CityDto();
+        cityDto3.setProvinceCode("430000");
+        cityDto3.setCityCode("430100");
+        cityDto3.setAreaCode("430121");
+        cityDto3.setTownCode("4310213");
+
+        CityDto cityDto4 = new CityDto();
+        cityDto4.setProvinceCode("430000");
+        cityDto4.setCityCode("430100");
+        cityDto4.setAreaCode("430121");
+        cityDto4.setTownCode("4301211");
+
+        CityDto cityDto5 = new CityDto();
+        cityDto5.setProvinceCode("430000");
+        cityDto5.setCityCode("430100");
+        cityDto5.setAreaCode("430121");
+        cityDto5.setTownCode("1");
+
+        lastData.add(cityDto1);
+        lastData.add(cityDto2);
+        lastData.add(cityDto3);
+        lastData.add(cityDto4);
+        lastData.add(cityDto5);
+        System.out.println("原来的值"+lastData);
+
+        List<CityDto> lastDataList = new ArrayList<>();
+        Boolean customerNameFlag = lastData.stream().filter(v -> "1".equals(v.getProvinceCode())).findAny().isPresent();
+        if(customerNameFlag){
+            CityDto c1 = lastDataList.stream().filter(v -> "1".equals(v.getProvinceCode())).collect(Collectors.toList()).get(0);
+            lastDataList.add(c1);
+        }else{
+            List<String> test = new ArrayList<>();
+            lastData.forEach(item ->{
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(item.getProvinceCode());
+                if(StringUtils.isNotBlank(item.getCityCode()) && !"1".equals(item.getCityCode())){
+                    stringBuilder.append("-").append(item.getCityCode());
+                }
+                if(StringUtils.isNotBlank(item.getAreaCode()) && !"1".equals(item.getAreaCode())){
+                    stringBuilder.append("-").append(item.getAreaCode());
+                }
+                if(StringUtils.isNotBlank(item.getTownCode()) && !"1".equals(item.getTownCode())){
+                    stringBuilder.append("-").append(item.getTownCode());
+                }
+                test.add(stringBuilder.toString());
+            });
+            List<String> newString = new ArrayList<>();
+            test.forEach(item ->{
+                //两次循环,判断字符串是否包含
+                test.forEach(item2 -> {
+                    //
+                    if(!item2.equals(item) && item2.contains(item)){
+                        newString.add(item2);
+                    }
+                });
+            });
+            System.out.println("原来的值转成String后"+JSONObject.toJSONString(test));
+            System.out.println("包含其他字符串的值"+JSONObject.toJSONString(newString));
+
+            List<String> last = test.stream().filter(v -> !newString.contains(v)).collect(Collectors.toList());
+            System.out.println("原来的值去除包含其他字符串的值后"+JSONObject.toJSONString(last));
+
+            last.forEach(item ->{
+                lastDataList.add(CityDto.from(item,lastData));
+            });
+            System.out.println("最后返回的city"+JSONObject.toJSONString(lastDataList));
+        }
     }
 
 }

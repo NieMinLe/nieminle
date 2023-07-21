@@ -190,7 +190,7 @@ public class DemoApplicationTests {
 
         Map<Integer,String> c1 = list1.stream().collect(Collectors.toMap(TestDto::getSage,TestDto::getSdept,(k,v) -> v));
 
-        Map<Integer,TestDto> c2 = list1.stream().limit(1).collect(Collectors.toMap(TestDto::getSage, Function.identity(),(k,v) -> v));
+        Map<Integer,TestDto> c2 = list1.stream().collect(Collectors.toMap(TestDto::getSage, Function.identity(),(k,v) -> v));
 
         Map<Integer,List<TestDto>> c3 = list1.stream().collect(Collectors.groupingBy(TestDto::getSage));
 
